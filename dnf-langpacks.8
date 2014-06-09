@@ -1,0 +1,36 @@
+.\" dnf-langpacks - Plugin for dnf
+.TH "dnf-langpacks" "8" ""  "Parag Nemade" ""
+.SH "NAME"
+dnf-langpacks \- Plugin for dnf 
+.SH "SYNOPSIS"
+\fBdnf\fP [command] [package ...]
+.SH "DESCRIPTION"
+.PP 
+\fBdnf-langpacks\fP is a plugin for dnf to install language packs. This plugin
+allows user various commands. 
+.PP 
+\fIcommands\fP available are:
+.br 
+.I \fB * langavailable  [language1] [language2] [\&.\&.\&.]
+   This command allows user to find if language support is available for the given input languages.
+
+.SH "EXAMPLES"
+.PP
+   \fBTo check if langpacks are available for language codes de, hi and language names Japanese and Portuguese (Brazil).\fP
+   dnf langavailable de "Japanese" hi "Portuguese (Brazil)"
+
+.SH "NOTES"
+   These commands accept language codes or language names or mix of them as a input.
+   General usage for end users is like this:
+   1) Use langavailable command to see if required language support is available.
+
+.PP
+.SH "SEE ALSO"
+.nf
+.I dnf (8)
+.fi
+
+.PP
+.SH "BUGS"
+Please report any bugs in Red Hat bugzilla, https://bugzilla.redhat.com/enter_bug.cgi?product=Fedora
+.fi
