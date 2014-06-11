@@ -1,0 +1,64 @@
+commit 9429c0550cac40afa0a286853811a053670d05d3
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Jun 11 10:41:17 2014 +0530
+
+    Add NEWS file
+
+ NEWS | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+commit 45b55d2f44e4213123e478623b7e3f76dfcb20ec
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Jun 11 09:59:51 2014 +0530
+
+    Add initial Makefile for tarball release
+
+ Makefile | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+
+commit 65c3f81484c3cb5e12a5f735b0780e453d368886
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Jun 10 14:13:07 2014 +0530
+
+    Add setup.py for installation of this module
+
+ setup.py | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+
+commit be6a7db017368a609c0eccfb877d42e42e9df7ec
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Jun 9 15:24:18 2014 +0530
+
+    Add man page for langavailable command
+
+ dnf-langpacks.8 | 36 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+
+commit a1058035cbe3f3f5929c03d6d24f78f52cef1fea
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Jun 9 15:17:55 2014 +0530
+
+    langavailable command
+
+ langpacks.py | 197 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 197 insertions(+)
+
+commit c4c4832be0753de70ac072cf3798ca82303df111
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Jun 9 15:00:30 2014 +0530
+
+    Add initial code
+
+ langpacks.py | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
+
+commit f46efabb8acf73d703c7a83721120f9e541b16b3
+Author: Parag Nemade <panemade@gmail.com>
+Date:   Fri Jun 6 14:00:19 2014 +0530
+
+    Initial commit
+
+ .gitignore |  54 ++++++++++
+ LICENSE    | 339 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ README.md  |   4 +
+ 3 files changed, 397 insertions(+)
