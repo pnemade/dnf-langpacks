@@ -8,8 +8,8 @@ import sys
 
 conditional_pkgs = {}
 
-class _lazy_import_langtable:
-
+class _LazyImportLangtable:
+    """ load lazily langtable module """
     def __init__(self):
         self.mod = None
 
@@ -19,7 +19,7 @@ class _lazy_import_langtable:
             self.mod = langtable
         return getattr(self.mod, name)
 
-langtable = _lazy_import_langtable()
+langtable = _LazyImportLangtable()
 
 def _setup_conditional_pkgs(repos):
     """ This takes ~0.2 seconds to init, so only do it if we need to
@@ -34,6 +34,7 @@ def _cElementTree_import():
         huge timesink. This makes python -c 'import yum' suck. So we hide it
         behind this function. And have accessors. """
     global __cached_cElementTree
+
     if __cached_cElementTree is None:
         try:
             from xml.etree import cElementTree
@@ -55,9 +56,9 @@ def iterparse(filename):
         print >>sys.stderr, '%s: %s' % (filename, str(e))
 
 def my_postreposetup_hook(repos):
-    """ This takes ~0.2 seconds to init, so don't do it for non-transaction commands.
-        This does mean we might end up downloading the groups file in postresolve,
-        but meh. """
+    """ This takes ~0.2 seconds to init, so don't do it for non-transaction
+        commands. This does mean we might end up downloading the groups
+        file in postresolve, but meh. """
 
     for repo in repos:
         if not repo.enablegroups:
@@ -70,7 +71,7 @@ def my_postreposetup_hook(repos):
 
         if repo.md_only_cached:
             infile = dnf.yum.misc.calculate_repo_gen_dest(comps_fn, 'groups.xml')
-            if not os.path.exists(decompressed):
+            if not os.path.exists(infile):
                 # root privileges are needed for comps decompression
                 continue
         else:
@@ -88,14 +89,16 @@ def my_postreposetup_hook(repos):
                         conditional_pkgs[name] = []
                     conditional_pkgs[name].append(install)
 
-def read_available_langpacks(packages):
+def read_available_langpacks(pkg_query_sack):
     """ Get the list of available language packages in the available repos """
     srchpkglist = []
-    skip_pkg_list = ['devel', 'browser', 'debuginfo', 'music', 'overrides', 'Brazil', 'British', 'Farsi', 'LowSaxon', 'cs_CZ']
+    skip_pkg_list = ['devel', 'browser', 'debuginfo', 'music', 'overrides',
+                     'Brazil', 'British', 'Farsi', 'LowSaxon', 'cs_CZ']
     langlist = []
     seen = set()
     res = []
 
+    packages = pkg_query_sack.query().available()
     for basepkg in conditional_pkgs:
         conds = conditional_pkgs[basepkg]
         pkg_pat = conds[0]
@@ -132,11 +135,12 @@ def read_available_langpacks(packages):
 
     return (seen, langlist)
 
-def lc_to_langname(lc):
+def langcode_to_langname(langcode):
     """ We need to get the language name for the given locale code  """
-    return langtable.language_name(languageId=lc, languageIdQuery="en").encode("UTF-8")
+    return langtable.language_name(languageId=langcode,
+                                    languageIdQuery="en").encode("UTF-8")
 
-def langname_to_lc(langname):
+def langname_to_langcode(langname):
     """ We need to get the locale code for the given language name """
     return langtable.languageId(languageName=langname)
 
@@ -149,7 +153,8 @@ def get_unique_language_names(alllanglist):
     for item in alllanglist:
         if item.count('_') or len(item) < 4:
             processed = processed + 1
-            langname = langtable.language_name(languageId=item, languageIdQuery="en").encode("UTF-8")
+            langname = langtable.language_name(languageId=item,
+                                   languageIdQuery="en").encode("UTF-8")
 
             if len(langname) < 1:
                 uniq_lang_list.append(langname)
@@ -181,19 +186,14 @@ class LangavailableCommand(dnf.cli.Command):
 
     def run(self, args):
         self.base.fill_sack()
-        self.done = []
-        self.packages = self.base.sack.query()
-        self.packages_available = self.packages.available()
-        self.packages_installed = self.packages.installed()
-
         _setup_conditional_pkgs(self.base.repos.iter_enabled())
-        (language_packs, ra_list) = read_available_langpacks(self.packages_available)
+        (language_packs, ra_list) = read_available_langpacks(self.base.sack)
         langlist = get_unique_language_names(ra_list)
 
         if not args:
             print("Displaying all available language:-")
             for litem in langlist:
-                lcname = langname_to_lc(litem)
+                lcname = langname_to_langcode(litem)
                 if lcname == "zh_Hans_CN":
                     lcname = "zh_CN"
                 elif lcname == "zh_Hant_TW":
@@ -207,7 +207,7 @@ class LangavailableCommand(dnf.cli.Command):
                     else:
                         print("{0} is not available".format(lang))
                 else:
-                    if lc_to_langname(lang) in langlist:
+                    if langcode_to_langname(lang) in langlist:
                         print("{0} is available".format(lang))
                     else:
                         print("{0} is not available".format(lang))
