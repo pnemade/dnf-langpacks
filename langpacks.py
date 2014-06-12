@@ -181,7 +181,7 @@ class LangavailableCommand(dnf.cli.Command):
     def configure(self, args):
         demands = self.cli.demands
         demands.resolving = True
-        demands.root_user = True
+        demands.root_user = False
         demands.sack_activation = True
 
     def run(self, args):
