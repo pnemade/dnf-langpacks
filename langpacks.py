@@ -153,8 +153,7 @@ def get_unique_language_names(alllanglist):
     for item in alllanglist:
         if item.count('_') or len(item) < 4:
             processed = processed + 1
-            langname = langtable.language_name(languageId=item,
-                                   languageIdQuery="en").encode("UTF-8")
+            langname = langcode_to_langname(item)
 
             if len(langname) < 1:
                 uniq_lang_list.append(langname)
