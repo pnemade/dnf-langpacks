@@ -173,6 +173,37 @@ class LangpackCommon(object):
 
         return sorted(uniq_lang_list)
 
+    def get_matches_from_repo(self, langpack_pkgs, lang):
+        """ Get the package matches for a given language """
+        avl_langpack_pkgs = []
+        #Check if lang is empty, case like input mara, marat
+        if len(lang) == 0:
+            return avl_langpack_pkgs
+        lname = self.langcode_to_langname(lang)
+        lang = "-" + lang
+        for pkgs in langpack_pkgs:
+            if len(lang) < 5 and lang.find("_") == -1:
+                if pkgs.find(lang, len(pkgs)-len(lang), len(pkgs)) > 0:
+                    avl_langpack_pkgs.append(pkgs)
+                if lname:
+                    if pkgs.find(lname, len(pkgs)-len(lname), len(pkgs)) > 0:
+                        avl_langpack_pkgs.append(pkgs)
+            if len(lang) > 4 and lang.find("_") != -1:
+                mainlang = lang[0:lang.find("_")]
+                if pkgs.find(lang, len(pkgs)-len(lang), len(pkgs)) > 0:
+                    avl_langpack_pkgs.append(pkgs)
+                # if input pt_BR then show for pt and pt_BR
+                # if input zh_CN then show for zh and zh_CN
+                elif pkgs.find(mainlang, len(pkgs)-len(mainlang), len(pkgs)) > 0:
+                    avl_langpack_pkgs.append(pkgs)
+
+                if lname:
+                    if pkgs.find(lname, len(pkgs)-len(lname), len(pkgs)) > 0:
+                        avl_langpack_pkgs.append(pkgs)
+
+        return sorted(avl_langpack_pkgs)
+
+
 class LangavailableCommand(dnf.cli.Command):
     """ Langpacks Langavailable plugin for DNF """
 
@@ -217,6 +248,53 @@ class LangavailableCommand(dnf.cli.Command):
 
         return 0, [""]
 
+class LanginfoCommand(dnf.cli.Command):
+    """ Langpacks Langinfo plugin for DNF """
+
+    aliases = ("langinfo",)
+    summary = _('Show langpack packages for a given language')
+    usage = "[LANG...]"
+
+    def configure(self, args):
+        demands = self.cli.demands
+        demands.resolving = True
+        demands.root_user = False
+        demands.sack_activation = True
+
+    def run(self, args):
+        self.base.fill_sack()
+        whitelisted_locales = ['en_AU', 'en_CA', 'en_GB', 'pt_BR', \
+                                                    'pt_PT', 'zh_CN', 'zh_TW']
+
+        langc = LangpackCommon()
+        langc.setup_conditional_pkgs(self.base.repos.iter_enabled())
+        (langpack_pkgs, ra_list) = langc.read_available_langpacks(self.base.sack)
+
+        for lang in args:
+            print("Language-Id={0}".format(lang))
+            if len(lang) == 1:
+                print("Not a valid input")
+                return 0, [""]
+            # Case to handle input like zh_CN, pt_BR
+            elif lang in whitelisted_locales and len(lang) > 3 and \
+                                                            lang.find("_") != -1:
+                list_pkgs = langc.get_matches_from_repo(langpack_pkgs, lang)
+            # Case for full language name input like Japanese
+            elif len(lang) > 3 and lang.find("_") == -1:
+                list_pkgs = langc.get_matches_from_repo(langpack_pkgs, \
+                                                 langc.langname_to_langcode(lang))
+            # General case to handle input like ja, ru, fr, it
+            else:
+                if lang.find("_") == -1:
+                    list_pkgs = langc.get_matches_from_repo(langpack_pkgs, lang)
+                # Case to not process mr_IN or mai_IN locales
+                else:
+                    list_pkgs = []
+            for pkg in list_pkgs:
+                print("  " + pkg)
+            if len(list_pkgs) == 0:
+                print("No langpacks to show for languages: {0}".format(lang))
+        return 0, [""]
 
 class Langpacks(dnf.Plugin):
     """DNF plugin supplying the 'langpacks langavailable' command."""
@@ -227,5 +305,6 @@ class Langpacks(dnf.Plugin):
         super(Langpacks, self).__init__(base, cli)
         if cli is not None:
             cli.register_command(LangavailableCommand)
+            cli.register_command(LanginfoCommand)
         cli.logger.debug("initialized Langpacks plugin")
 
