@@ -233,6 +233,23 @@ class LangpackCommon(object):
 
         return sorted(avl_langpack_pkgs)
 
+    def read_installed_langpacks(self):
+        """ Read the installed langpacks file """
+        if not self.conffile:
+            return []
+        ret = []
+        try:
+            f = open(self.conffile, "r")
+            llist = f.readlines()
+            f.close()
+        except (IOError, OSError) as e:
+            print >>sys.stderr, '%s' % (str(e))
+            return []
+        for item in llist:
+            item = item.strip()
+            ret.append(item)
+        return ret
+
 class LangavailableCommand(dnf.cli.Command):
     """ Langpacks Langavailable plugin for DNF """
 
@@ -326,6 +343,28 @@ class LanginfoCommand(dnf.cli.Command):
                 print("No langpacks to show for languages: {0}".format(lang))
         return 0, [""]
 
+class LanglistCommand(dnf.cli.Command):
+    """ Langpacks Langlist plugin for DNF """
+
+    aliases = ("langlist",)
+    summary = _('Show installed languages')
+    usage = "[LANG...]"
+
+    def configure(self, args):
+        demands = self.cli.demands
+        demands.resolving = True
+        demands.root_user = False
+        demands.sack_activation = True
+
+    def run(self, args):
+        langc = LangpackCommon()
+        llist = langc.read_installed_langpacks()
+        print("Installed languages:")
+        for item in llist:
+            if not item.startswith("#"):
+                print("\t" + langc.langcode_to_langname(item))
+        return 0, [""]
+
 class Langpacks(dnf.Plugin):
     """DNF plugin supplying the 'langpacks' commands"""
 
@@ -336,5 +375,6 @@ class Langpacks(dnf.Plugin):
         if cli is not None:
             cli.register_command(LangavailableCommand)
             cli.register_command(LanginfoCommand)
+            cli.register_command(LanglistCommand)
         cli.logger.debug("initialized Langpacks plugin")
 
