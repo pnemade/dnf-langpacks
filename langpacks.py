@@ -50,6 +50,7 @@ class CompsParser(object):
 class LangpackCommon(object):
     def __init__(self):
         self.conditional_pkgs = {}
+        self.conffile = '/var/lib/yum/plugins/langpacks/installed_langpacks'
 
     @classmethod
     def langcode_to_langname(cls, langcode):
@@ -92,7 +93,8 @@ class LangpackCommon(object):
                 infile = dnf.yum.misc.repo_gen_decompress(comps_fn, 'groups.xml')
 
             comparse = CompsParser()
-            for event, elem in comparse.iterparse(infile):
+            for tp in comparse.iterparse(infile):
+                elem = tp[1]
                 if elem.tag == "langpacks":
                     for child in elem.getchildren():
                         if child.tag != "match":
@@ -105,12 +107,9 @@ class LangpackCommon(object):
                         self.conditional_pkgs[name].append(install)
 
     def read_available_langpacks(self, pkg_query_sack):
-        """ Get the list of available language packages in the available repos """
+        """ Common function for getting the list of languages in the
+            available repos """
         srchpkglist = []
-        skip_pkg_list = ['devel', 'browser', 'debuginfo', 'music', 'overrides',
-                     'Brazil', 'British', 'Farsi', 'LowSaxon', 'cs_CZ']
-        langlist = []
-        seen = set()
         res = []
 
         packages = pkg_query_sack.query().available()
@@ -129,9 +128,17 @@ class LangpackCommon(object):
                 # all other code still uses str type strings.
                 res.append(str(pkg.name))
 
+        return (res, srchpkglist)
+
+    def read_available_langpacks_pkgs(self, pkg_query_sack):
+        """ Get the names of language packages """
+        langpkgs = set()
+
+        (res, srchpkglist) = self.read_available_langpacks(pkg_query_sack)
+
         for srchpkg in srchpkglist:
             for pkgname in res:
-                if pkgname not in seen:
+                if pkgname not in langpkgs:
                     if pkgname.startswith(srchpkg):
                         langsplit = pkgname.split('-')
                         # lname is available language pack
@@ -139,13 +146,36 @@ class LangpackCommon(object):
                         # Special case for parsing packages alphabet_sounds_*
                         if lname.startswith("alphabet_sounds_"):
                             lname = lname[16:]
-                        seen.add(pkgname)
+                        langpkgs.add(pkgname)
 
-                        if lname not in langlist:
+        return langpkgs
+
+    def read_available_languages_list(self, pkg_query_sack):
+        """ Get the available languages list """
+        skip_pkg_list = ['devel', 'browser', 'debuginfo', 'music', 'overrides',
+                     'Brazil', 'British', 'Farsi', 'LowSaxon', 'cs_CZ']
+        lang_list = []
+        langpkgs = set()
+
+        (res, srchpkglist) = self.read_available_langpacks(pkg_query_sack)
+
+        for srchpkg in srchpkglist:
+            for pkgname in res:
+                if pkgname not in langpkgs:
+                    if pkgname.startswith(srchpkg):
+                        langsplit = pkgname.split('-')
+                        # lname is available language pack
+                        lname = langsplit[srchpkg.count('-')]
+                        # Special case for parsing packages alphabet_sounds_*
+                        if lname.startswith("alphabet_sounds_"):
+                            lname = lname[16:]
+                        langpkgs.add(pkgname)
+
+                        if lname not in lang_list:
                             if lname not in skip_pkg_list:
-                                langlist.append(lname)
+                                lang_list.append(lname)
 
-        return (seen, langlist)
+        return lang_list
 
     def get_unique_language_names(self, alllanglist):
         """ Let's gather available languages list"""
@@ -203,7 +233,6 @@ class LangpackCommon(object):
 
         return sorted(avl_langpack_pkgs)
 
-
 class LangavailableCommand(dnf.cli.Command):
     """ Langpacks Langavailable plugin for DNF """
 
@@ -221,12 +250,12 @@ class LangavailableCommand(dnf.cli.Command):
         self.base.fill_sack()
         langc = LangpackCommon()
         langc.setup_conditional_pkgs(self.base.repos.iter_enabled())
-        (language_packs, ra_list) = langc.read_available_langpacks(self.base.sack)
-        langlist = langc.get_unique_language_names(ra_list)
+        langavail_list = langc.read_available_languages_list(self.base.sack)
+        lang_list = langc.get_unique_language_names(langavail_list)
 
         if not args:
             print("Displaying all available language:-")
-            for litem in langlist:
+            for litem in lang_list:
                 lcname = langc.langname_to_langcode(litem)
                 if lcname == "zh_Hans_CN":
                     lcname = "zh_CN"
@@ -236,12 +265,12 @@ class LangavailableCommand(dnf.cli.Command):
         else:
             for lang in args:
                 if len(lang) > 3 and lang.find("_") == -1:
-                    if lang.lower() in list(map(str.lower, langlist)):
+                    if lang.lower() in list(map(str.lower, lang_list)):
                         print("{0} is available".format(lang))
                     else:
                         print("{0} is not available".format(lang))
                 else:
-                    if langc.langcode_to_langname(lang) in langlist:
+                    if langc.langcode_to_langname(lang) in lang_list:
                         print("{0} is available".format(lang))
                     else:
                         print("{0} is not available".format(lang))
@@ -268,7 +297,7 @@ class LanginfoCommand(dnf.cli.Command):
 
         langc = LangpackCommon()
         langc.setup_conditional_pkgs(self.base.repos.iter_enabled())
-        (langpack_pkgs, ra_list) = langc.read_available_langpacks(self.base.sack)
+        avail_langpack_pkgs = langc.read_available_langpacks_pkgs(self.base.sack)
 
         for lang in args:
             print("Language-Id={0}".format(lang))
@@ -278,15 +307,16 @@ class LanginfoCommand(dnf.cli.Command):
             # Case to handle input like zh_CN, pt_BR
             elif lang in whitelisted_locales and len(lang) > 3 and \
                                                             lang.find("_") != -1:
-                list_pkgs = langc.get_matches_from_repo(langpack_pkgs, lang)
+                list_pkgs = langc.get_matches_from_repo(avail_langpack_pkgs, lang)
             # Case for full language name input like Japanese
             elif len(lang) > 3 and lang.find("_") == -1:
-                list_pkgs = langc.get_matches_from_repo(langpack_pkgs, \
+                list_pkgs = langc.get_matches_from_repo(avail_langpack_pkgs,\
                                                  langc.langname_to_langcode(lang))
             # General case to handle input like ja, ru, fr, it
             else:
                 if lang.find("_") == -1:
-                    list_pkgs = langc.get_matches_from_repo(langpack_pkgs, lang)
+                    list_pkgs = langc.get_matches_from_repo(avail_langpack_pkgs,\
+                                                                            lang)
                 # Case to not process mr_IN or mai_IN locales
                 else:
                     list_pkgs = []
@@ -297,7 +327,7 @@ class LanginfoCommand(dnf.cli.Command):
         return 0, [""]
 
 class Langpacks(dnf.Plugin):
-    """DNF plugin supplying the 'langpacks langavailable' command."""
+    """DNF plugin supplying the 'langpacks' commands"""
 
     name = 'langpacks'
     def __init__(self, base, cli):
