@@ -1,3 +1,85 @@
+commit 3ea57f697477d340a9eef92ba1f3ae1a39bab179
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Jul 8 10:20:27 2014 +0530
+
+    bump the release to 0.3.0
+
+ NEWS     | 12 +++++++++++-
+ setup.py |  2 +-
+ 2 files changed, 12 insertions(+), 2 deletions(-)
+
+commit 2c5b789013f51c2fa4f1ec85cc60e0b8f0734ecd
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Jul 8 10:00:09 2014 +0530
+
+    Added langlist command
+
+ langpacks.py | 40 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
+
+commit 15486f7235f6da41f84c01e985d6c0b2680148ac
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Jul 8 09:59:27 2014 +0530
+
+    split common code from read_available_langpacks function
+
+ langpacks.py | 74 ++++++++++++++++++++++++++++++++++++++++++------------------
+ 1 file changed, 52 insertions(+), 22 deletions(-)
+
+commit aedb1afe9df4bf74f6299bdf0b97072d7ef6f0fc
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Jul 7 08:39:55 2014 +0530
+
+    Add langinfo command
+
+ langpacks.py | 79 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 79 insertions(+)
+
+commit 7a41ed96e1d90d72be7e9397f382593557082741
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Sat Jun 28 19:02:51 2014 +0530
+
+    re-write the exisiting code to make the lint happy
+
+ langpacks.py | 296 ++++++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 150 insertions(+), 146 deletions(-)
+
+commit d1d03c12bdfce0b12d911260b387c5d6de318b42
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Jun 12 21:49:45 2014 +0530
+
+    Use actual function instead its own code
+
+ langpacks.py | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+commit 39ae336c5a8073d0caf1625285a6dffb95c0ae3f
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Jun 12 21:22:31 2014 +0530
+
+    We don't need root privileges for executing langavailable command
+
+ langpacks.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 61c21a1b621f184079ca9228130b8e9dff0f9408
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Jun 12 21:21:09 2014 +0530
+
+    Add some cleanups to existing code
+
+ langpacks.py | 42 +++++++++++++++++++++---------------------
+ 1 file changed, 21 insertions(+), 21 deletions(-)
+
+commit 738a0831ad0586dec83919e42fa97c9f51a5e8ba
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Jun 11 10:41:49 2014 +0530
+
+    Add ChangeLog file
+
+ ChangeLog | 64 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 64 insertions(+)
+
 commit 9429c0550cac40afa0a286853811a053670d05d3
 Author: Parag Nemade <pnemade@redhat.com>
 Date:   Wed Jun 11 10:41:17 2014 +0530
