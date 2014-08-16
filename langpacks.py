@@ -16,7 +16,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-from dnfpluginscore import _
+from dnfpluginscore import _, logger
 
 import dnf
 import dnf.cli
@@ -394,5 +394,5 @@ class Langpacks(dnf.Plugin):
             cli.register_command(LangavailableCommand)
             cli.register_command(LanginfoCommand)
             cli.register_command(LanglistCommand)
-        cli.logger.debug("initialized Langpacks plugin")
+        logger.debug("initialized Langpacks plugin")
 
