@@ -1,4 +1,9 @@
-Overview of changes leading to 0.3.0 release
+Overview of changes leading to 0.3.1 release
+
+Wed, Aug 27, 2014
+-------------------
+- Added license text header to langpacks.py
+- fix incompatibility issue with dnf-0.6.0 release
 
 Tue, Jul 08, 2014
 -------------------
