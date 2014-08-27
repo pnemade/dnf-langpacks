@@ -1,3 +1,39 @@
+commit 27c7e161cc69b218071a37caf5d9a0511d4ac101
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Aug 27 12:11:33 2014 +0530
+
+    prepare for 0.3.1 release
+
+ NEWS | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+commit c389b2e7904ae4837b1f5c93671d0dbee71e2347
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Sat Aug 16 11:59:11 2014 +0530
+
+    Use logger as module level variable and not instance attribute since dnf-0.6.0 release
+
+ langpacks.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 538ee3027179c4e291c918dcf77b52c4acbca0c7
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Jul 10 10:57:46 2014 +0530
+
+    Added license header in langpacks.py file
+
+ langpacks.py | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+commit 1583179c5fa12dc7e83308f0b75f15dbe1d5be77
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Jul 8 10:21:25 2014 +0530
+
+    update changelog and release 0.3.0
+
+ ChangeLog | 82 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 82 insertions(+)
+
 commit 3ea57f697477d340a9eef92ba1f3ae1a39bab179
 Author: Parag Nemade <pnemade@redhat.com>
 Date:   Tue Jul 8 10:20:27 2014 +0530
