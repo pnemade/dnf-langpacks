@@ -18,6 +18,10 @@ allows user various commands.
 .I \fB * langinfo  [language1] [language2] [\&.\&.\&.]
    This command will show the user what packages will get installed by a given input languages.
 
+.br
+.I \fB * langlist
+   This command will show the user what languages are already installed on the system.
+
 .SH "EXAMPLES"
 .PP
    \fBTo check if langpacks are available for language codes de, hi and language names Japanese and Portuguese (Brazil).\fP
@@ -27,11 +31,16 @@ allows user various commands.
    \fBTo check what packages will get installed for language codes de, hi and language names Japanese and Portuguese (Brazil).\fP
    dnf langinfo de "Japanese" hi "Portuguese (Brazil)"
 
+.PP
+   \fBTo check what packages are already installed on your system.\fP
+   dnf langlist
+
 .SH "NOTES"
    These commands accept language codes or language names or mix of them as a input.
    General usage for end users is like this:
    1) Use langavailable command to see if required language support is available.
    2) Use langinfo command to know what packages will get installed.
+   3) Use langlist to know if you have required language already installed or not.
 
 .PP
 .SH "SEE ALSO"
