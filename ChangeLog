@@ -1,3 +1,94 @@
+commit b0ab3b75db4ac875fdc513709a3e46b5b85743a2
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Oct 7 23:18:51 2014 +0530
+
+    update NEWS and bump version to 0.4.0
+
+ NEWS     | 6 +++++-
+ setup.py | 2 +-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+commit bd37c0b76127c4e505b39680de210283a2bc79bd
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Oct 7 23:14:22 2014 +0530
+
+    Add man page entry for langinstall command
+
+ dnf-langpacks.8 | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+commit 2f6a71db86661294cafe5d07463a4fc8f0e7a94b
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Oct 7 23:12:57 2014 +0530
+
+    Fix typo in man page for langlist command
+
+ dnf-langpacks.8 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit a51a6726c9b5e03c3ecda4ccc9aff969d2e78bd7
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Oct 7 23:06:43 2014 +0530
+
+    Add man page entry for langlist command
+
+ dnf-langpacks.8 | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+commit 00b01cd2114b8f74c286e2c66345e5e22607c2e2
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Oct 7 22:52:22 2014 +0530
+
+    Add man page entry for langinfo command
+
+ dnf-langpacks.8 | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+commit 80ed031731617e764ad16b1c22cae0b0bddb684e
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Oct 7 22:05:15 2014 +0530
+
+    Added langinstall command
+
+ langpacks.py | 60 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 60 insertions(+)
+
+commit f0328ce55eeb1afac6d6a1cc5737c1a2c3d1614d
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Oct 7 21:59:33 2014 +0530
+
+    Added methods to handle langpack entry on the system
+
+ langpacks.py | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+
+commit d583b898704c1a3a3a875fc6d919677da2311ec0
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Oct 7 21:05:55 2014 +0530
+
+    Added method add_matches_from_ts
+
+ langpacks.py | 46 ++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 46 insertions(+)
+
+commit 0cff2a103cf688179ed8a23f2c6fd4c31806e64e
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Oct 7 21:02:39 2014 +0530
+
+    Clean the code to make happy dnf lint command
+
+ langpacks.py | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
+
+commit c5c0e245c3e8e60c2edfb8e4cee3a6891323d9e6
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Aug 27 12:12:24 2014 +0530
+
+    update changelog and release 0.3.1
+
+ ChangeLog | 36 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+
 commit 27c7e161cc69b218071a37caf5d9a0511d4ac101
 Author: Parag Nemade <pnemade@redhat.com>
 Date:   Wed Aug 27 12:11:33 2014 +0530
