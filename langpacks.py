@@ -269,6 +269,38 @@ class LangpackCommon(object):
             ret.append(item)
         return ret
 
+    def write_installed_langpacks(self, instlanglist):
+        """ Write the installed langpacks file """
+        if not self.conffile:
+            return
+        conffile_dir = os.path.dirname(self.conffile)
+        if not os.path.exists(conffile_dir):
+            try:
+                os.makedirs(conffile_dir, 0755)
+            except (IOError, OSError) as fperror:
+                print >>sys.stderr, '%s' % (str(fperror))
+                return
+        try:
+            tmp = open(self.conffile + ".tmp", "w+")
+            for line in instlanglist:
+                tmp.write(line + "\n")
+            tmp.close()
+            os.rename(self.conffile + ".tmp", self.conffile)
+        except (IOError, OSError) as fperror:
+            print >>sys.stderr, '%s' % (str(fperror))
+            return
+
+    def add_langpack_to_installed_list(self, langs):
+        """ Add newly installed langs to the langpacks file """
+        modified = 0
+        readinstlanglist = self.read_installed_langpacks()
+        for lang in langs:
+            if lang not in readinstlanglist:
+                readinstlanglist.append(lang)
+                modified = 1
+        if modified:
+            self.write_installed_langpacks(readinstlanglist)
+
     @classmethod
     def get_matches(cls, availpkg, llist):
         ret = []
