@@ -68,6 +68,7 @@ class CompsParser(object):
 class LangpackCommon(object):
     def __init__(self):
         self.conditional_pkgs = {}
+        self.langinstalled = []
         self.conffile = '/var/lib/yum/plugins/langpacks/installed_langpacks'
 
     @classmethod
@@ -267,6 +268,51 @@ class LangpackCommon(object):
             item = item.strip()
             ret.append(item)
         return ret
+
+    @classmethod
+    def get_matches(cls, availpkg, llist):
+        ret = []
+        for match in llist:
+            try:
+                p = availpkg.filter(provides=match)
+                if p[0].name:
+                    ret.append(p[0].name)
+            except:
+                pass
+        return ret
+
+    def add_matches_from_ts(self, lang, base):
+        pkgmatches = []
+        ipkgs = []
+        pkgstoinstall = []
+        allpkg = base.sack.query()
+        instpkg = allpkg.installed()
+        availpkg = allpkg.available()
+        availpkg = availpkg.latest()
+        for pkg in instpkg:
+            ipkgs.append(pkg.name)
+
+        for basepkg in self.conditional_pkgs:
+            if basepkg in ipkgs:
+                conds = self.conditional_pkgs[basepkg]
+                patterns = [x % (lang,) for x in conds]
+                shortlang = lang.split('_')[0]
+                if shortlang != lang:
+                    patterns = patterns + [x % (shortlang,) for x in conds]
+                for p in patterns:
+                    if p not in pkgmatches:
+                        # just pattern matched pkgs irrespective of its existence
+                        pkgmatches.append(p)
+
+        # Available in repo pattern matched pkgs
+        pkgs = self.get_matches(availpkg, pkgmatches)
+        # we want to make sure pkgs return only if
+        # those pkgs are available to be installed
+        for pk in pkgs:
+            if pk not in ipkgs:
+                pkgstoinstall.append(pk)
+
+        return pkgstoinstall
 
 class LangavailableCommand(dnf.cli.Command):
     """ Langpacks Langavailable plugin for DNF """
