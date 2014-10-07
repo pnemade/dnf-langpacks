@@ -59,10 +59,10 @@ class CompsParser(object):
 
     def iterparse(self, filename):
         try:
-            for e in self.c_elementtree_iterparse(filename):
-                yield e
-        except SyntaxError as e:
-            print >>sys.stderr, '%s: %s' % (filename, str(e))
+            for elem in self.c_elementtree_iterparse(filename):
+                yield elem
+        except SyntaxError as elem:
+            print >>sys.stderr, '%s: %s' % (filename, str(elem))
 
 
 class LangpackCommon(object):
@@ -257,11 +257,11 @@ class LangpackCommon(object):
             return []
         ret = []
         try:
-            f = open(self.conffile, "r")
-            llist = f.readlines()
-            f.close()
-        except (IOError, OSError) as e:
-            print >>sys.stderr, '%s' % (str(e))
+            conf_fp = open(self.conffile, "r")
+            llist = conf_fp.readlines()
+            conf_fp.close()
+        except (IOError, OSError) as fperror:
+            print >>sys.stderr, '%s' % (str(fperror))
             return []
         for item in llist:
             item = item.strip()
