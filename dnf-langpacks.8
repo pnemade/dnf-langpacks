@@ -14,15 +14,24 @@ allows user various commands.
 .I \fB * langavailable  [language1] [language2] [\&.\&.\&.]
    This command allows user to find if language support is available for the given input languages.
 
+.br
+.I \fB * langinfo  [language1] [language2] [\&.\&.\&.]
+   This command will show the user what packages will get installed by a given input languages.
+
 .SH "EXAMPLES"
 .PP
    \fBTo check if langpacks are available for language codes de, hi and language names Japanese and Portuguese (Brazil).\fP
    dnf langavailable de "Japanese" hi "Portuguese (Brazil)"
 
+.PP
+   \fBTo check what packages will get installed for language codes de, hi and language names Japanese and Portuguese (Brazil).\fP
+   dnf langinfo de "Japanese" hi "Portuguese (Brazil)"
+
 .SH "NOTES"
    These commands accept language codes or language names or mix of them as a input.
    General usage for end users is like this:
    1) Use langavailable command to see if required language support is available.
+   2) Use langinfo command to know what packages will get installed.
 
 .PP
 .SH "SEE ALSO"
