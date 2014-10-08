@@ -399,7 +399,7 @@ class LanginfoCommand(dnf.cli.Command):
 
     def configure(self, args):
         demands = self.cli.demands
-        demands.resolving = True
+        demands.resolving = False
         demands.root_user = False
         demands.sack_activation = True
 
