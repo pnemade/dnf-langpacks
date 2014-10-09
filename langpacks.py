@@ -301,6 +301,22 @@ class LangpackCommon(object):
         if modified:
             self.write_installed_langpacks(readinstlanglist)
 
+    def remove_langpack_from_installed_list(self, langs):
+        """ Remove requested installed langs from the langpacks file """
+        modified = 0
+        removelang = ""
+        readinstlanglist = self.read_installed_langpacks()
+        for lang in langs:
+            if len(lang) > 3 and lang.find("_") == -1:
+                removelang = self.langname_to_langcode(lang)
+            else:
+                removelang = lang
+            if removelang in readinstlanglist:
+                readinstlanglist.remove(removelang)
+                modified = 1
+        if modified:
+            self.write_installed_langpacks(readinstlanglist)
+
     @classmethod
     def get_matches(cls, availpkg, llist):
         ret = []
