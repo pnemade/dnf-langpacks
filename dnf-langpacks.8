@@ -26,6 +26,10 @@ allows user various commands.
 .I \fB * langinstall  [language1] [language2] [\&.\&.\&.]
    This command will install the given input languages.
 
+.br
+.I \fB * langremove  [language1] [language2] [\&.\&.\&.]
+   This command will remove the given input languages.
+
 .SH "EXAMPLES"
 .PP
    \fBTo check if langpacks are available for language codes de, hi and language names Japanese and Portuguese (Brazil).\fP
@@ -43,6 +47,10 @@ allows user various commands.
    \fBTo install the languages for language codes de, hi and language names Japanese and Portuguese (Brazil).\fP
    dnf langinstall de "Japanese" hi "Portuguese (Brazil)"
 
+.PP
+   \fBTo remove the languages for language codes de, hi and language names Japanese and Portuguese (Brazil).\fP
+   dnf langremove de "Japanese" hi "Portuguese (Brazil)"
+
 .SH "NOTES"
    These commands accept language codes or language names or mix of them as a input.
    General usage for end users is like this:
@@ -50,6 +58,7 @@ allows user various commands.
    2) Use langinfo command to know what packages will get installed.
    3) Use langlist to know if you have required language already installed or not.
    4) Use langinstall to install any new available language.
+   5) Or Use langremove to remove any installed language.
 
 .PP
 .SH "SEE ALSO"
