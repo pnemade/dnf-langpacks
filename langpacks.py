@@ -346,6 +346,39 @@ class LangpackCommon(object):
 
         return pkgstoinstall
 
+    def remove_matches_from_ts(self, lang, base):
+        pkgmatches = []
+        ipkgs = []
+        pkgstoremove = []
+        allpkg = base.sack.query()
+        instpkg = allpkg.installed()
+        availpkg = allpkg.available()
+        availpkg = availpkg.latest()
+        for pkg in instpkg:
+            ipkgs.append(pkg.name)
+
+        for basepkg in self.conditional_pkgs:
+            if basepkg in ipkgs:
+                conds = self.conditional_pkgs[basepkg]
+                patterns = [x % (lang,) for x in conds]
+                shortlang = lang.split('_')[0]
+                if shortlang != lang:
+                    patterns = patterns + [x % (shortlang,) for x in conds]
+                for p in patterns:
+                    if p not in pkgmatches:
+                        # just pattern matched pkgs irrespective of its existence
+                        pkgmatches.append(p)
+
+        # Available in repo pattern matched pkgs
+        pkgs = self.get_matches(availpkg, pkgmatches)
+        # we want to make sure pkgs return only if
+        # those pkgs are installed already
+        for pk in pkgs:
+            if pk in ipkgs:
+                pkgstoremove.append(pk)
+
+        return pkgstoremove
+
 class LangavailableCommand(dnf.cli.Command):
     """ Langpacks Langavailable plugin for DNF """
 
