@@ -569,6 +569,65 @@ class LanginstallCommand(dnf.cli.Command):
 
         return
 
+class LangremoveCommand(dnf.cli.Command):
+    """ langremove plugin for DNF """
+
+    aliases = ("langremove",)
+    summary = _('Remove the given packages')
+    usage = "[PKG1...]"
+
+    def configure(self, args):
+        demands = self.cli.demands
+        demands.resolving = False
+        demands.root_user = True
+        demands.sack_activation = True
+        demands.available_repos = True
+
+    def run(self, args):
+        langc = LangpackCommon()
+        langc.setup_conditional_pkgs(self.base.repos.iter_enabled())
+        (language_packs, ra_list) = langc.read_available_langpacks(self.base.sack)
+        all_pkgs = []
+
+        for lang in args:
+            if len(lang) > 3 and lang.find("_") == -1:
+                pkgs = langc.remove_matches_from_ts( \
+                            langc.langname_to_langcode(lang), self.base)
+                if pkgs and lang not in langc.langinstalled:
+                    langc.langinstalled.append(langc.langname_to_langcode(lang))
+                    for pk in pkgs:
+                        all_pkgs.append(pk)
+            else:
+                pkgs = langc.remove_matches_from_ts(lang, self.base)
+                if pkgs and lang not in langc.langinstalled:
+                    langc.langinstalled.append(lang)
+                    for pk in pkgs:
+                        all_pkgs.append(pk)
+
+        for pkg in all_pkgs:
+            try:
+                self.base.remove(pkg)
+            except dnf.exceptions.MarkingError:
+                msg = _("No matching package to install: '%s'") % pkg
+                raise dnf.exceptions.Error(msg)
+
+        ret = self.base.resolve()
+        to_dnl = []
+        if ret:
+            for tsi in self.base.transaction:
+                print(" "+tsi.active_history_state+" - "+ str(tsi.active))
+                if tsi.installed:
+                    to_dnl.append(tsi.installed)
+            self.base.download_packages(to_dnl)
+            self.base.do_transaction()
+            print('Language packs removed for: %s' \
+                                         % (' '.join(langc.langinstalled)))
+            langc.remove_langpack_from_installed_list(langc.langinstalled)
+        else:
+            print('No langpacks to remove for: %s' % (' '.join(args)))
+
+        return
+
 class Langpacks(dnf.Plugin):
     """DNF plugin supplying the 'langpacks' commands"""
 
@@ -581,5 +640,6 @@ class Langpacks(dnf.Plugin):
             cli.register_command(LanginfoCommand)
             cli.register_command(LanglistCommand)
             cli.register_command(LanginstallCommand)
+            cli.register_command(LangremoveCommand)
         logger.debug("initialized Langpacks plugin")
 
