@@ -1,3 +1,85 @@
+commit dda3a3951a19d63af1d04708aa605ac1e1971e37
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Sat Oct 11 15:58:56 2014 +0530
+
+    bump version to 0.5.0
+
+ NEWS     | 8 +++++++-
+ setup.py | 2 +-
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+commit 62f26198d2401b4b127d7538255b305b009a66e7
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Oct 9 07:06:22 2014 +0530
+
+    Add langremove command reference in man page
+
+ dnf-langpacks.8 | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+commit 9e0f8fde65eae688382578b58b83cf24c25e5503
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Oct 9 06:58:42 2014 +0530
+
+    Added langremove command
+
+ langpacks.py | 60 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 60 insertions(+)
+
+commit c46e1c52b2ca2ee7d0907d2c03e8253d4a909af5
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Oct 9 06:56:11 2014 +0530
+
+    Add remove_langpack_from_installed_list method for langremove command
+
+ langpacks.py | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+commit 90f6da2f359ddbb0315dafdc24965d442d55fd89
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Oct 9 06:54:58 2014 +0530
+
+    Add remove_matches_from_ts method for langremove command
+
+ langpacks.py | 33 +++++++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+
+commit 3bf763108d26c8389af172d41d6819dd3b4fdf04
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Oct 8 22:27:42 2014 +0530
+
+    We don't do any package resolving in langlist. Mark it False
+
+ langpacks.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 561017ceb5efcae50b3404e2ba878e64233d1c32
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Oct 8 22:27:17 2014 +0530
+
+    We don't do any package resolving in langinfo. Mark it False
+
+ langpacks.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit ce2600d9869737d36fb8832cb36c9ccdb1beb980
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Oct 8 22:26:41 2014 +0530
+
+    We don't do any package resolving in langavailable. Mark it False
+
+ langpacks.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 790548b93660d66d94df3cd89a17e1d91bd7064e
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Oct 7 23:22:13 2014 +0530
+
+    update ChangeLog and prepare for 0.4.0 release
+
+ ChangeLog | 91 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 91 insertions(+)
+
 commit b0ab3b75db4ac875fdc513709a3e46b5b85743a2
 Author: Parag Nemade <pnemade@redhat.com>
 Date:   Tue Oct 7 23:18:51 2014 +0530
