@@ -1,8 +1,14 @@
-Overview of changes leading to 0.4.0 release
+Overview of changes leading to 0.5.0 release
+
+Sat, Oct 11, 2014
+------------------
+- Added langremove command
+- updated man page for langremove command usage
 
 Tue, Oct 07, 2014
 ------------------
 - Added langinstall command
+- updated man page for langinstall command usage
 
 Wed, Aug 27, 2014
 -------------------
