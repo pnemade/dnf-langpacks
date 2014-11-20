@@ -1,3 +1,58 @@
+commit 89b692d6c3e447d4879072f0c0311d3744ba8bc2
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Nov 20 21:21:46 2014 +0530
+
+    update NEWS and bump version to 0.5.1
+
+ NEWS     | 8 +++++++-
+ setup.py | 2 +-
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+commit 423e22c7ce4e5a7f9655229611904acaa083081f
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Nov 20 21:13:17 2014 +0530
+
+    langremove: man-pages-zh-CN package is not removed for zh_CN locale
+
+ langpacks.py | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit ac279f6f3e861b1ab86c0cf33a7d125fa08979ec
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Nov 20 21:12:03 2014 +0530
+
+    langinstall: man-pages-zh-CN package is not installed for zh_CN locale
+
+ langpacks.py | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit 8bad02e88f3c85080b58c2d1a06fa2e9dca0238c
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Nov 20 21:11:00 2014 +0530
+
+    some code cleanup (indentation) as per pylint report
+
+ langpacks.py | 26 +++++++++++++-------------
+ 1 file changed, 13 insertions(+), 13 deletions(-)
+
+commit 07cab75da5002ff7b4d55c9d70abf18afea397f4
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Nov 19 22:48:56 2014 +0530
+
+    man-pages-zh-CN is not installed for zh_CN locale
+
+ langpacks.py | 24 ++++++++++++++----------
+ 1 file changed, 14 insertions(+), 10 deletions(-)
+
+commit 8dbf709c7d70a2aafa0c01bbdc2274391ee9bea1
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Sat Oct 11 15:59:50 2014 +0530
+
+    Update ChangeLog and prepare for 0.5.0 release
+
+ ChangeLog | 82 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 82 insertions(+)
+
 commit dda3a3951a19d63af1d04708aa605ac1e1971e37
 Author: Parag Nemade <pnemade@redhat.com>
 Date:   Sat Oct 11 15:58:56 2014 +0530
