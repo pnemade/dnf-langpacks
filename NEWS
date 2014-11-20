@@ -1,4 +1,10 @@
-Overview of changes leading to 0.5.0 release
+Overview of changes leading to 0.5.1 release
+
+Thu, Nov 20, 2014
+------------------
+- langremove: man-pages-zh-CN package is not removed for zh_CN locale
+- langinstall: man-pages-zh-CN package is not installed for zh_CN locale
+- langinfo: man-pages-zh-CN package is not shown for zh_CN locale
 
 Sat, Oct 11, 2014
 ------------------
