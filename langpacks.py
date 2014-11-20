@@ -356,6 +356,11 @@ class LangpackCommon(object):
                         # just pattern matched pkgs irrespective of its existence
                         pkgmatches.append(p)
 
+        # This is special case to cover package name man-pages-zh-CN
+        # which should have been named as man-pages-zh_CN
+        if lang.find("zh_CN") != -1:
+           pkgmatches.append("man-pages-zh-CN")
+
         # Available in repo pattern matched pkgs
         pkgs = self.get_matches(availpkg, pkgmatches)
         # we want to make sure pkgs return only if
