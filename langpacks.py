@@ -74,7 +74,7 @@ class LangpackCommon(object):
     @classmethod
     def langcode_to_langname(cls, langcode):
         """ We need to get the language name for the given locale code  """
-        return langtable.language_name(languageId=langcode,
+        return langtable.language_name(languageId=langcode, \
                                     languageIdQuery="en").encode("UTF-8")
 
     @classmethod
@@ -171,7 +171,7 @@ class LangpackCommon(object):
 
     def read_available_languages_list(self, pkg_query_sack):
         """ Get the available languages list """
-        skip_pkg_list = ['devel', 'browser', 'debuginfo', 'music', 'overrides',
+        skip_pkg_list = ['devel', 'browser', 'debuginfo', 'music', 'overrides', \
                      'Brazil', 'British', 'Farsi', 'LowSaxon', 'cs_CZ']
         lang_list = []
         langpkgs = set()
@@ -240,19 +240,20 @@ class LangpackCommon(object):
 
             if len(lang) > 4:
                 if lang.find("_") != -1:
-                   mainlang = lang[0:lang.find("_")]
-                   if lang.find("_CN") != -1 and pkgs.find("-CN") != -1:
-                       avl_langpack_pkgs.append(pkgs)
-                   if pkgs.find(lang, len(pkgs)-len(lang), len(pkgs)) > 0:
-                       avl_langpack_pkgs.append(pkgs)
-                   # if input pt_BR then show for pt and pt_BR
-                   # if input zh_CN then show for zh and zh_CN
-                   elif pkgs.find(mainlang, len(pkgs)-len(mainlang), len(pkgs)) > 0:
-                       avl_langpack_pkgs.append(pkgs)
+                    mainlang = lang[0:lang.find("_")]
+                    if lang.find("_CN") != -1 and pkgs.find("-CN") != -1:
+                        avl_langpack_pkgs.append(pkgs)
+                    if pkgs.find(lang, len(pkgs)-len(lang), len(pkgs)) > 0:
+                        avl_langpack_pkgs.append(pkgs)
+                    # if input pt_BR then show for pt and pt_BR
+                    # if input zh_CN then show for zh and zh_CN
+                    elif pkgs.find(mainlang, len(pkgs)-len(mainlang), \
+                                                            len(pkgs)) > 0:
+                        avl_langpack_pkgs.append(pkgs)
 
-                   if lname:
-                      if pkgs.find(lname, len(pkgs)-len(lname), len(pkgs)) > 0:
-                          avl_langpack_pkgs.append(pkgs)
+                    if lname:
+                        if pkgs.find(lname, len(pkgs)-len(lname), len(pkgs)) > 0:
+                            avl_langpack_pkgs.append(pkgs)
 
         return sorted(avl_langpack_pkgs)
 
@@ -359,15 +360,16 @@ class LangpackCommon(object):
         # This is special case to cover package name man-pages-zh-CN
         # which should have been named as man-pages-zh_CN
         if lang.find("zh_CN") != -1:
-           pkgmatches.append("man-pages-zh-CN")
+            pkgmatches.append("man-pages-zh-CN")
 
         # Available in repo pattern matched pkgs
         pkgs = self.get_matches(availpkg, pkgmatches)
+
         # we want to make sure pkgs return only if
         # those pkgs are available to be installed
-        for pk in pkgs:
-            if pk not in ipkgs:
-                pkgstoinstall.append(pk)
+        for pkg in pkgs:
+            if pkg not in ipkgs:
+                pkgstoinstall.append(pkg)
 
         return pkgstoinstall
 
@@ -397,15 +399,16 @@ class LangpackCommon(object):
         # This is special case to cover package name man-pages-zh-CN
         # which should have been named as man-pages-zh_CN
         if lang.find("zh_CN") != -1:
-           pkgmatches.append("man-pages-zh-CN")
+            pkgmatches.append("man-pages-zh-CN")
 
         # Available in repo pattern matched pkgs
         pkgs = self.get_matches(availpkg, pkgmatches)
+
         # we want to make sure pkgs return only if
         # those pkgs are installed already
-        for pk in pkgs:
-            if pk in ipkgs:
-                pkgstoremove.append(pk)
+        for pkg in pkgs:
+            if pkg in ipkgs:
+                pkgstoremove.append(pkg)
 
         return pkgstoremove
 
@@ -656,4 +659,3 @@ class Langpacks(dnf.Plugin):
             cli.register_command(LanginstallCommand)
             cli.register_command(LangremoveCommand)
         logger.debug("initialized Langpacks plugin")
-
