@@ -16,6 +16,8 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
+from __future__ import absolute_import
+from __future__ import unicode_literals
 from dnfpluginscore import _, logger
 
 import dnf
@@ -217,7 +219,7 @@ class LangpackCommon(object):
                 else:
                     dup = dup + 1
             else:
-                if item not in uniq_lang_list:
+                if item not in str(uniq_lang_list):
                     uniq_lang_list.append(item)
                 else:
                     dup = dup + 1
@@ -446,7 +448,7 @@ class LangavailableCommand(dnf.cli.Command):
         else:
             for lang in args:
                 if len(lang) > 3 and lang.find("_") == -1:
-                    if lang.lower() in list(map(str.lower, lang_list)):
+                    if lang.lower() in list(map(str.lower, str(lang_list))):
                         print("{0} is available".format(lang))
                     else:
                         print("{0} is not available".format(lang))
