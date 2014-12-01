@@ -69,6 +69,8 @@ class LangpackCommon(object):
     def __init__(self):
         self.conditional_pkgs = {}
         self.langinstalled = []
+        self.langalreadyinstalled = []
+        self.nolangpacks = []
         self.conffile = '/var/lib/yum/plugins/langpacks/installed_langpacks'
 
     @classmethod
@@ -548,6 +550,7 @@ class LanginstallCommand(dnf.cli.Command):
         all_pkgs = []
 
         for lang in args:
+            ## Full language names
             if len(lang) > 3 and lang.find("_") == -1:
                 pkgs = langc.add_matches_from_ts( \
                             langc.langname_to_langcode(lang), self.base)
@@ -555,12 +558,30 @@ class LanginstallCommand(dnf.cli.Command):
                     langc.langinstalled.append(langc.langname_to_langcode(lang))
                     for pk in pkgs:
                         all_pkgs.append(pk)
+                else:
+                    if langc.langname_to_langcode(lang) in \
+                                               langc.read_installed_langpacks():
+                        langc.langalreadyinstalled.append( \
+                                               langc.langname_to_langcode(lang))
+                    else:
+                        # consider case like input is invalid langname like paap
+                        if langc.langname_to_langcode(lang):
+                            langc.nolangpacks.append(langc.langname_to_langcode\
+                                                                          (lang))
+                        else:
+                            langc.nolangpacks.append(lang)
+            ## locale codes given as input
             else:
                 pkgs = langc.add_matches_from_ts(lang, self.base)
                 if pkgs and lang not in langc.langinstalled:
                     langc.langinstalled.append(lang)
                     for pk in pkgs:
                         all_pkgs.append(pk)
+                else:
+                    if lang in langc.read_installed_langpacks():
+                        langc.langalreadyinstalled.append(lang)
+                    else:
+                        langc.nolangpacks.append(lang)
 
         for pkg in all_pkgs:
             try:
@@ -578,11 +599,20 @@ class LanginstallCommand(dnf.cli.Command):
                     to_dnl.append(tsi.installed)
             self.base.download_packages(to_dnl)
             self.base.do_transaction()
+            if langc.langalreadyinstalled:
+                print('langpacks already installed for: %s' % \
+                                    (' '.join(langc.langalreadyinstalled)))
+
             print('Language packs installed for: %s' \
                                          % (' '.join(langc.langinstalled)))
             langc.add_langpack_to_installed_list(langc.langinstalled)
         else:
-            print('No langpacks to install for: %s' % (' '.join(args)))
+            if langc.langalreadyinstalled:
+                print('langpacks already installed for: %s' % \
+                                    (' '.join(langc.langalreadyinstalled)))
+            if langc.nolangpacks:
+                print('No langpacks to install for: %s' % \
+                                             (' '.join(langc.nolangpacks)))
 
         return
 
