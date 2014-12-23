@@ -1,3 +1,49 @@
+commit 865588a129271b15e4473db048f880e65c956ae5
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Dec 23 15:11:15 2014 +0530
+
+    Update NEWS and bump version to 0.6.0
+
+ NEWS     | 8 +++++++-
+ setup.py | 2 +-
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+commit 8677aeb0748f092ef9f8c66f7d6d02714d268008
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Dec 1 08:40:10 2014 +0530
+
+    langavailable: Fix unicode warning
+
+ langpacks.py | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+commit 3b3e0b839df934812a3038319f8a792e4b4d1181
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Dec 1 08:37:39 2014 +0530
+
+    langinstall: Display separate messages for langpack already installed or no langpacks available along with newly installed langpack message
+
+ langpacks.py | 32 +++++++++++++++++++++++++++++++-
+ 1 file changed, 31 insertions(+), 1 deletion(-)
+
+commit 2a88b1e3d0a2f79508b9cae1af7219973bf18369
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Fri Nov 28 13:55:47 2014 +0530
+
+    lint: coding style cleanups
+
+ langpacks.py | 50 ++++++++++++++++++++++++++------------------------
+ 1 file changed, 26 insertions(+), 24 deletions(-)
+
+commit f9e03a4f0ba1dd9e259dd653f59cc1bf36c1e606
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Nov 20 21:24:12 2014 +0530
+
+    Update ChangeLog and prepare for 0.5.1 release
+
+ ChangeLog | 55 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 55 insertions(+)
+
 commit 89b692d6c3e447d4879072f0c0311d3744ba8bc2
 Author: Parag Nemade <pnemade@redhat.com>
 Date:   Thu Nov 20 21:21:46 2014 +0530
