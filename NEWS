@@ -1,4 +1,10 @@
-Overview of changes leading to 0.5.1 release
+Overview of changes leading to 0.6.0 release
+
+Tue, Dec 23, 2014
+-----------------
+- langinstall: Display separate messages for langpack already installed
+  or no langpacks available along with newly installed langpack message
+- langavailable: Fix unicode warning
 
 Thu, Nov 20, 2014
 ------------------
