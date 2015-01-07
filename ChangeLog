@@ -1,3 +1,40 @@
+commit 8555272ed06682d29a743aa62e417115c06ab5cd
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Jan 7 15:44:37 2015 +0530
+
+    Update NEWS and bump version to 0.6.1
+
+ NEWS     | 7 ++++++-
+ setup.py | 2 +-
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+
+commit 5d118260f50f5bf9beb1302f80ddb92ebfdc9f36
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Jan 7 15:41:56 2015 +0530
+
+    Use the list comprehensions
+
+ langpacks.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit a6a9b4afacad632a8cac1572cebfa9eabceaddb3
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Jan 7 15:40:27 2015 +0530
+
+    Fix the non-unicode langname
+
+ langpacks.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 1df46da1ada0d6775e80f68b58306be4279561b6
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Dec 23 15:12:46 2014 +0530
+
+    Update ChangeLog and prepare for 0.6.0 release
+
+ ChangeLog | 46 ++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 46 insertions(+)
+
 commit 865588a129271b15e4473db048f880e65c956ae5
 Author: Parag Nemade <pnemade@redhat.com>
 Date:   Tue Dec 23 15:11:15 2014 +0530
