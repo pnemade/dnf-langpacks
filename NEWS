@@ -1,4 +1,9 @@
-Overview of changes leading to 0.6.0 release
+Overview of changes leading to 0.6.1 release
+
+Wed, Jan 07, 2015
+-----------------
+- langavailable: Fix the non-unicode langname 
+- langavailabel: Use the list comprehensions
 
 Tue, Dec 23, 2014
 -----------------
