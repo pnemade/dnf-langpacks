@@ -79,7 +79,7 @@ class LangpackCommon(object):
     def langcode_to_langname(cls, langcode):
         """ We need to get the language name for the given locale code  """
         return langtable.language_name(languageId=langcode, \
-                                    languageIdQuery="en").encode("UTF-8")
+                                    languageIdQuery="en")
 
     @classmethod
     def langname_to_langcode(cls, langname):
@@ -219,7 +219,7 @@ class LangpackCommon(object):
                 else:
                     dup = dup + 1
             else:
-                if item not in str(uniq_lang_list):
+                if item not in uniq_lang_list:
                     uniq_lang_list.append(item)
                 else:
                     dup = dup + 1
