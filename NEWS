@@ -1,9 +1,13 @@
-Overview of changes leading to 0.6.1 release
+Overview of changes leading to 0.7.0 release
+
+Mon, Feb 02, 2015
+-----------------
+- Added langpacks.conf file
 
 Wed, Jan 07, 2015
 -----------------
 - langavailable: Fix the non-unicode langname 
-- langavailabel: Use the list comprehensions
+- langavailable: Use the list comprehensions
 
 Tue, Dec 23, 2014
 -----------------
