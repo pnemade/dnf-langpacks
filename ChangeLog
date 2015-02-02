@@ -1,3 +1,40 @@
+commit 1786a7e4a44c9a9f1f7b1665fc0c720806257f10
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Feb 2 17:57:59 2015 +0530
+
+    Update NEWS and bump version to 0.7.0
+
+ NEWS     | 8 ++++++--
+ setup.py | 5 +++--
+ 2 files changed, 9 insertions(+), 4 deletions(-)
+
+commit ef3e6701d7f45ea17c3ecbb179dee1a23e74c6f7
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Feb 2 17:56:53 2015 +0530
+
+    Add langpacks.conf in Makefile also
+
+ Makefile | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit a391e3623b0d3ff147d821bddc1f568680e8b994
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Sun Feb 1 19:15:45 2015 +0530
+
+    Added langpacks.conf file
+
+ langpacks.conf | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+commit 61f15aa6d0c72db565a0f0723dbf43f0d034dce0
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Jan 7 15:45:24 2015 +0530
+
+    Update ChangeLog and prepare for 0.6.1 release
+
+ ChangeLog | 37 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
+
 commit 8555272ed06682d29a743aa62e417115c06ab5cd
 Author: Parag Nemade <pnemade@redhat.com>
 Date:   Wed Jan 7 15:44:37 2015 +0530
