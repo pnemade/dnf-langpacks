@@ -3,7 +3,8 @@ VERSION = $(shell python setup.py -V)
 
 DIST = dist
 
-SRC_FILES = LICENSE ChangeLog Makefile README.md langpacks.py setup.py dnf-langpacks.8
+SRC_FILES = LICENSE ChangeLog Makefile README.md langpacks.conf \
+            langpacks.py setup.py dnf-langpacks.8
 
 $(NAME)-$(VERSION).tar.gz:
 	mkdir -p dist
