@@ -285,7 +285,7 @@ class LangpackCommon(object):
         conffile_dir = os.path.dirname(self.conffile)
         if not os.path.exists(conffile_dir):
             try:
-                os.makedirs(conffile_dir, 0755)
+                os.makedirs(conffile_dir)
             except (IOError, OSError) as fperror:
                 print >>sys.stderr, '%s' % (str(fperror))
                 return
