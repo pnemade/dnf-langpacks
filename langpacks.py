@@ -147,9 +147,7 @@ class LangpackCommon(object):
             srchpat = srchpat + "*"
             srch_pat_pkgs = packages.filter(name__glob=srchpat)
             for pkg in srch_pat_pkgs:
-                # Note I see here pkg is returning unicode string and
-                # all other code still uses str type strings.
-                res.append(str(pkg.name))
+                res.append(pkg.name)
 
         return (res, srchpkglist)
 
