@@ -546,7 +546,7 @@ class LanginstallCommand(dnf.cli.Command):
     def run(self, args):
         langc = LangpackCommon()
         langc.setup_conditional_pkgs(self.base.repos.iter_enabled())
-        (language_packs, ra_list) = langc.read_available_langpacks(self.base.sack)
+        langc.read_available_langpacks(self.base.sack)
         all_pkgs = []
 
         for lang in args:
@@ -633,7 +633,7 @@ class LangremoveCommand(dnf.cli.Command):
     def run(self, args):
         langc = LangpackCommon()
         langc.setup_conditional_pkgs(self.base.repos.iter_enabled())
-        (language_packs, ra_list) = langc.read_available_langpacks(self.base.sack)
+        langc.read_available_langpacks(self.base.sack)
         all_pkgs = []
 
         for lang in args:
