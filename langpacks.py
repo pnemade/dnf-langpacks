@@ -74,6 +74,22 @@ class LangpackCommon(object):
         self.langalreadyinstalled = []
         self.nolangpacks = []
         self.conffile = '/var/lib/yum/plugins/langpacks/installed_langpacks'
+        # we are not sure if conffile already exists on the system or
+        # user moved or deleted it. To make sure we have conffile before
+        # using any langpacks command let's try to create it first.
+        self.conffile_dir = os.path.dirname(self.conffile)
+        if not os.path.exists(self.conffile_dir):
+            try:
+                os.makedirs(self.conffile_dir)
+            except (IOError, OSError) as fperror:
+                print >>sys.stderr, '%s' % (str(fperror))
+                return
+        try:
+            with open(self.conffile, 'a'):
+                pass
+        except IOError:
+            print "Unable to create installed_langpacks file"
+
 
     @classmethod
     def langcode_to_langname(cls, langcode):
@@ -280,13 +296,6 @@ class LangpackCommon(object):
         """ Write the installed langpacks file """
         if not self.conffile:
             return
-        conffile_dir = os.path.dirname(self.conffile)
-        if not os.path.exists(conffile_dir):
-            try:
-                os.makedirs(conffile_dir)
-            except (IOError, OSError) as fperror:
-                print >>sys.stderr, '%s' % (str(fperror))
-                return
         try:
             tmp = open(self.conffile + ".tmp", "w+")
             for line in instlanglist:
