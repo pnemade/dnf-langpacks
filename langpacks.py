@@ -531,6 +531,9 @@ class LanglistCommand(dnf.cli.Command):
             for item in llist:
                 if not item.startswith("#"):
                     print("\t" + langc.langcode_to_langname(item))
+        else:
+            print("No langpacks installed")
+
         return 0, [""]
 
 class LanginstallCommand(dnf.cli.Command):
