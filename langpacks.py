@@ -531,10 +531,11 @@ class LanglistCommand(dnf.cli.Command):
     def run(self, args):
         langc = LangpackCommon()
         llist = langc.read_installed_langpacks()
-        print("Installed languages:")
-        for item in llist:
-            if not item.startswith("#"):
-                print("\t" + langc.langcode_to_langname(item))
+        if llist:
+            print("Installed languages:")
+            for item in llist:
+                if not item.startswith("#"):
+                    print("\t" + langc.langcode_to_langname(item))
         return 0, [""]
 
 class LanginstallCommand(dnf.cli.Command):
