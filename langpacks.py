@@ -24,7 +24,6 @@ import dnf
 import dnf.cli
 import dnf.yum.misc
 import os
-import sys
 
 
 class _LazyImportLangtable(object):
@@ -64,7 +63,7 @@ class CompsParser(object):
             for elem in self.c_elementtree_iterparse(filename):
                 yield elem
         except SyntaxError as elem:
-            print >>sys.stderr, '%s: %s' % (filename, str(elem))
+            print('Syntax error in file %s for %s' % (filename, elem))
 
 
 class LangpackCommon(object):
@@ -82,13 +81,13 @@ class LangpackCommon(object):
             try:
                 os.makedirs(self.conffile_dir)
             except (IOError, OSError) as fperror:
-                print >>sys.stderr, '%s' % (str(fperror))
+                print('Unable to create file : %s' % self.conffile)
                 return
-        try:
-            with open(self.conffile, 'a'):
-                pass
-        except IOError:
-            print "Unable to create installed_langpacks file"
+            try:
+                with open(self.conffile, 'a'):
+                    pass
+            except IOError:
+                print "Unable to create installed_langpacks file"
 
 
     @classmethod
@@ -285,7 +284,7 @@ class LangpackCommon(object):
             llist = conf_fp.readlines()
             conf_fp.close()
         except (IOError, OSError) as fperror:
-            print >>sys.stderr, '%s' % (str(fperror))
+            print('Error reading file : %s as it does not exist' % self.conffile)
             return []
         for item in llist:
             item = item.strip()
@@ -303,7 +302,7 @@ class LangpackCommon(object):
             tmp.close()
             os.rename(self.conffile + ".tmp", self.conffile)
         except (IOError, OSError) as fperror:
-            print >>sys.stderr, '%s' % (str(fperror))
+            print('Error writing file : %s' % self.conffile)
             return
 
     def add_langpack_to_installed_list(self, langs):
