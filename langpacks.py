@@ -344,17 +344,8 @@ class LangpackCommon(object):
                 pass
         return ret
 
-    def add_matches_from_ts(self, lang, base):
+    def find_matching_pkgs(self, ipkgs, lang):
         pkgmatches = []
-        ipkgs = []
-        pkgstoinstall = []
-        allpkg = base.sack.query()
-        instpkg = allpkg.installed()
-        availpkg = allpkg.available()
-        availpkg = availpkg.latest()
-        for pkg in instpkg:
-            ipkgs.append(pkg.name)
-
         for basepkg in self.conditional_pkgs:
             if basepkg in ipkgs:
                 conds = self.conditional_pkgs[basepkg]
@@ -366,6 +357,20 @@ class LangpackCommon(object):
                     if p not in pkgmatches:
                         # just pattern matched pkgs irrespective of its existence
                         pkgmatches.append(p)
+        return pkgmatches
+
+    def add_matches_from_ts(self, lang, base):
+        pkgmatches = []
+        ipkgs = []
+        pkgstoinstall = []
+        allpkg = base.sack.query()
+        instpkg = allpkg.installed()
+        availpkg = allpkg.available()
+        availpkg = availpkg.latest()
+        for pkg in instpkg:
+            ipkgs.append(pkg.name)
+
+        pkgmatches = self.find_matching_pkgs(ipkgs, lang)
 
         # This is special case to cover package name man-pages-zh-CN
         # which should have been named as man-pages-zh_CN
@@ -394,17 +399,7 @@ class LangpackCommon(object):
         for pkg in instpkg:
             ipkgs.append(pkg.name)
 
-        for basepkg in self.conditional_pkgs:
-            if basepkg in ipkgs:
-                conds = self.conditional_pkgs[basepkg]
-                patterns = [x % (lang,) for x in conds]
-                shortlang = lang.split('_')[0]
-                if shortlang != lang:
-                    patterns = patterns + [x % (shortlang,) for x in conds]
-                for p in patterns:
-                    if p not in pkgmatches:
-                        # just pattern matched pkgs irrespective of its existence
-                        pkgmatches.append(p)
+        pkgmatches = self.find_matching_pkgs(ipkgs, lang)
 
         # This is special case to cover package name man-pages-zh-CN
         # which should have been named as man-pages-zh_CN
