@@ -1,3 +1,94 @@
+commit 16bcf60fa9d45bde1bb02883363b4647b45cd58a
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Feb 12 13:46:52 2015 +0530
+
+    Update NEWS and bump version to 0.8.0
+
+ NEWS     | 13 ++++++++++++-
+ setup.py |  2 +-
+ 2 files changed, 13 insertions(+), 2 deletions(-)
+
+commit 420a97f91652d9107fcb8e226e359072c06cac77
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Feb 11 23:11:53 2015 +0530
+
+    langlist: print message when langlist is empty in installed_langpacks file
+
+ langpacks.py | 3 +++
+ 1 file changed, 3 insertions(+)
+
+commit 86851ba13eaba01597c9570e7063e95d47ec52e0
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Feb 11 23:10:03 2015 +0530
+
+    LangpackCommon: simplify *_matches_from_ts code by adding find_matching_pkgs function
+
+ langpacks.py | 37 ++++++++++++++++---------------------
+ 1 file changed, 16 insertions(+), 21 deletions(-)
+
+commit c690398c87eb593c9bd413a96f7cfb1c5f690d99
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Feb 11 19:40:49 2015 +0530
+
+    langlist: print installed langlist only when its available
+
+ langpacks.py | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+commit 6c04d7c7f4078d063f80eda27925b16206703807
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Feb 11 19:36:57 2015 +0530
+
+    general: Improve error messages
+
+ langpacks.py | 19 +++++++++----------
+ 1 file changed, 9 insertions(+), 10 deletions(-)
+
+commit 3f05b72ec6ed61dea5a71b6e8891e76ac7c51d08
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Feb 9 21:47:44 2015 +0530
+
+    LangpackCommon class: Check conffile existence in init function only
+
+ langpacks.py | 23 ++++++++++++++++-------
+ 1 file changed, 16 insertions(+), 7 deletions(-)
+
+commit a5f8102b28a7c551975660d310e05b7018e66de0
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Feb 3 22:37:37 2015 +0530
+
+    Fix some pylint messages
+
+ langpacks.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 17ad61531032e9b7ae397638303e3a8a65d782a7
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Feb 3 22:33:39 2015 +0530
+
+    I think all code uses unicode strings now
+
+ langpacks.py | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+commit 78a124473be1c4c1da14e64ec7a4a825356b1765
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Feb 3 22:27:17 2015 +0530
+
+    permissions are optional and currently they errors in py3 fedora package, so remove them
+
+ langpacks.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit b8df8fee143af4be7dfc9f38c3f61117a60568ba
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Feb 2 18:07:31 2015 +0530
+
+    Update ChangeLog and prepare for 0.7.0 release
+
+ ChangeLog | 37 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
+
 commit 1786a7e4a44c9a9f1f7b1665fc0c720806257f10
 Author: Parag Nemade <pnemade@redhat.com>
 Date:   Mon Feb 2 17:57:59 2015 +0530
