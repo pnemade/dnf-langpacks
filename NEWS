@@ -1,4 +1,8 @@
-Overview of changes leading to 0.8.0 release
+Overview of changes leading to 0.8.1 release
+
+Mon, Feb 12, 2015
+-----------------
+- LangpackCommon: Fix print statement without parenthesis for py3
 
 Mon, Feb 12, 2015
 -----------------
