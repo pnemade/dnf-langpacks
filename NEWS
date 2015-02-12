@@ -1,4 +1,15 @@
-Overview of changes leading to 0.7.0 release
+Overview of changes leading to 0.8.0 release
+
+Mon, Feb 12, 2015
+-----------------
+- langlist: print message when langlist is empty in installed_langpacks file
+- LangpackCommon: simplify *_matches_from_ts code by adding find_matching_pkgs function
+- langlist: print installed langlist only when its available
+- general: Improve error messages
+- LangpackCommon class: Check conffile existence in init function only
+- Fix some pylint messages
+- I think all code uses unicode strings now
+- permissions are optional and currently they errors in py3 fedora package, so remove them
 
 Mon, Feb 02, 2015
 -----------------
