@@ -1,3 +1,31 @@
+commit 59d0da66a6fc6f74f2e80188ab408e4dc77f97b5
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Feb 12 14:13:35 2015 +0530
+
+    Update NEWS and bump version to 0.8.1
+
+ NEWS     | 6 +++++-
+ setup.py | 2 +-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+commit fa0099c8b369cb9891c7770be638a8ddc9cbafb7
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Feb 12 14:10:48 2015 +0530
+
+    LangpackCommon: Fix print statement without parenthesis for py3
+
+ langpacks.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 1a95941fea05af49f264bc84888fed3e6de0c86a
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Feb 12 13:48:10 2015 +0530
+
+    Update ChangeLog and prepare for 0.8.0 release
+
+ ChangeLog | 91 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 91 insertions(+)
+
 commit 16bcf60fa9d45bde1bb02883363b4647b45cd58a
 Author: Parag Nemade <pnemade@redhat.com>
 Date:   Thu Feb 12 13:46:52 2015 +0530
