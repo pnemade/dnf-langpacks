@@ -87,7 +87,7 @@ class LangpackCommon(object):
                 with open(self.conffile, 'a'):
                     pass
             except IOError:
-                print "Unable to create installed_langpacks file"
+                print("Unable to create installed_langpacks file")
 
 
     @classmethod
