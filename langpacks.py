@@ -168,9 +168,7 @@ class LangpackCommon(object):
         for basepkg in self.conditional_pkgs:
             conds = self.conditional_pkgs[basepkg]
             pkg_pat = conds[0]
-            # Special case to skip tesseract packages
-            if not (pkg_pat.startswith("tesseract-langpack-")):
-                srchpkglist.append(pkg_pat[:-2])
+            srchpkglist.append(pkg_pat[:-2])
 
         for srchpat in srchpkglist:
             srchpat = srchpat + "*"
