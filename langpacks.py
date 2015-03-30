@@ -144,7 +144,8 @@ class LangpackCommon(object):
                             self.conditional_pkgs[name] = []
                         self.conditional_pkgs[name].append(install)
 
-    def check_virtual_provides(self, base_sack, res, avail_pkgs):
+    @classmethod
+    def check_virtual_provides(cls, base_sack, res, avail_pkgs):
         """ find corresponding real package name """
         real_pkg_list = []
         for apkg in sorted(avail_pkgs):
@@ -186,13 +187,13 @@ class LangpackCommon(object):
 
         for srchpkg in srchpkglist:
             if lang == "pt_PT":
-               srchpkgs = srchpkg + "pt"
-               langpkgs.add(srchpkgs)
-               srchpkg = srchpkg + lang
-               langpkgs.add(srchpkg)
+                srchpkgs = srchpkg + "pt"
+                langpkgs.add(srchpkgs)
+                srchpkg = srchpkg + lang
+                langpkgs.add(srchpkg)
             else:
-               srchpkg = srchpkg + lang
-               langpkgs.add(srchpkg)
+                srchpkg = srchpkg + lang
+                langpkgs.add(srchpkg)
 
         return (res, langpkgs)
 
@@ -469,17 +470,23 @@ class LanginfoCommand(dnf.cli.Command):
             # Case to handle input like zh_CN, pt_BR
             elif lang in whitelisted_locales and len(lang) > 3 and \
                                                             lang.find("_") != -1:
-                (res, avail_langpack_pkgs) = langc.read_available_langpacks_pkgs(self.base.sack, lang)
-                list_pkgs = langc.check_virtual_provides(self.base.sack, res, avail_langpack_pkgs)
+                (res, avail_langpack_pkgs) = langc.read_available_langpacks_pkgs(
+                    self.base.sack, lang)
+                list_pkgs = langc.check_virtual_provides(
+                    self.base.sack, res, avail_langpack_pkgs)
             # Case for full language name input like Japanese
             elif len(lang) > 3 and lang.find("_") == -1:
-                (res, avail_langpack_pkgs) = langc.read_available_langpacks_pkgs(self.base.sack, langc.langname_to_langcode(lang))
-                list_pkgs = langc.check_virtual_provides(self.base.sack, res, avail_langpack_pkgs)
+                (res, avail_langpack_pkgs) = langc.read_available_langpacks_pkgs(
+                    self.base.sack, langc.langname_to_langcode(lang))
+                list_pkgs = langc.check_virtual_provides(
+                    self.base.sack, res, avail_langpack_pkgs)
             # General case to handle input like ja, ru, fr, it
             else:
                 if lang.find("_") == -1:
-                    (res, avail_langpack_pkgs) = langc.read_available_langpacks_pkgs(self.base.sack, lang)
-                    list_pkgs = langc.check_virtual_provides(self.base.sack, res, avail_langpack_pkgs)
+                    (res, avail_langpack_pkgs) = langc.read_available_langpacks_pkgs(
+                        self.base.sack, lang)
+                    list_pkgs = langc.check_virtual_provides(
+                        self.base.sack, res, avail_langpack_pkgs)
                 # Case to not process mr_IN or mai_IN locales
                 else:
                     list_pkgs = []
