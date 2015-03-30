@@ -251,41 +251,6 @@ class LangpackCommon(object):
 
         return sorted(uniq_lang_list)
 
-    def get_matches_from_repo(self, langpack_pkgs, lang):
-        """ Get the package matches for a given language """
-        avl_langpack_pkgs = []
-        #Check if lang is empty, case like input mara, marat
-        if len(lang) == 0:
-            return avl_langpack_pkgs
-        lname = self.langcode_to_langname(lang)
-        lang = "-" + lang
-        for pkgs in langpack_pkgs:
-            if len(lang) < 5 and lang.find("_") == -1:
-                if pkgs.find(lang, len(pkgs)-len(lang), len(pkgs)) > 0:
-                    avl_langpack_pkgs.append(pkgs)
-                if lname:
-                    if pkgs.find(lname, len(pkgs)-len(lname), len(pkgs)) > 0:
-                        avl_langpack_pkgs.append(pkgs)
-
-            if len(lang) > 4:
-                if lang.find("_") != -1:
-                    mainlang = lang[0:lang.find("_")]
-                    if lang.find("_CN") != -1 and pkgs.find("-CN") != -1:
-                        avl_langpack_pkgs.append(pkgs)
-                    if pkgs.find(lang, len(pkgs)-len(lang), len(pkgs)) > 0:
-                        avl_langpack_pkgs.append(pkgs)
-                    # if input pt_BR then show for pt and pt_BR
-                    # if input zh_CN then show for zh and zh_CN
-                    elif pkgs.find(mainlang, len(pkgs)-len(mainlang), \
-                                                            len(pkgs)) > 0:
-                        avl_langpack_pkgs.append(pkgs)
-
-                    if lname:
-                        if pkgs.find(lname, len(pkgs)-len(lname), len(pkgs)) > 0:
-                            avl_langpack_pkgs.append(pkgs)
-
-        return sorted(avl_langpack_pkgs)
-
     def read_installed_langpacks(self):
         """ Read the installed langpacks file """
         if not self.conffile:
