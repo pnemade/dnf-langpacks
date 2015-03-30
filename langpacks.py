@@ -327,7 +327,11 @@ class LangpackCommon(object):
                 patterns = [x % (lang,) for x in conds]
                 shortlang = lang.split('_')[0]
                 if shortlang != lang:
-                    patterns = patterns + [x % (shortlang,) for x in conds]
+                    if lang == "pt_BR":
+                        patterns = patterns + [x % (lang,) for x in conds]
+                    else:
+                        patterns = patterns + [x % (shortlang,) for x in conds]
+
                 for p in patterns:
                     if p not in pkgmatches:
                         # just pattern matched pkgs irrespective of its existence
