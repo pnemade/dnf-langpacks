@@ -178,25 +178,23 @@ class LangpackCommon(object):
 
         return (res, srchpkglist)
 
-    def read_available_langpacks_pkgs(self, pkg_query_sack):
+    def read_available_langpacks_pkgs(self, pkg_query_sack, lang):
         """ Get the names of language packages """
         langpkgs = set()
 
         (res, srchpkglist) = self.read_available_langpacks(pkg_query_sack)
 
         for srchpkg in srchpkglist:
-            for pkgname in res:
-                if pkgname not in langpkgs:
-                    if pkgname.startswith(srchpkg):
-                        langsplit = pkgname.split('-')
-                        # lname is available language pack
-                        lname = langsplit[srchpkg.count('-')]
-                        # Special case for parsing packages alphabet_sounds_*
-                        if lname.startswith("alphabet_sounds_"):
-                            lname = lname[16:]
-                        langpkgs.add(pkgname)
+            if lang == "pt_PT":
+               srchpkgs = srchpkg + "pt"
+               langpkgs.add(srchpkgs)
+               srchpkg = srchpkg + lang
+               langpkgs.add(srchpkg)
+            else:
+               srchpkg = srchpkg + lang
+               langpkgs.add(srchpkg)
 
-        return langpkgs
+        return (res, langpkgs)
 
     def read_available_languages_list(self, pkg_query_sack):
         """ Get the available languages list """
