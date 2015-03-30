@@ -144,6 +144,20 @@ class LangpackCommon(object):
                             self.conditional_pkgs[name] = []
                         self.conditional_pkgs[name].append(install)
 
+    def check_virtual_provides(self, base_sack, res, avail_pkgs):
+        """ find corresponding real package name """
+        real_pkg_list = []
+        for apkg in sorted(avail_pkgs):
+            if apkg in res:
+                if apkg not in real_pkg_list:
+                    real_pkg_list.append(apkg)
+            else:
+                sltrs = dnf.subject.Subject(apkg).get_best_selector(base_sack)
+                for pkg in sltrs.matches():
+                    if pkg.name not in real_pkg_list:
+                        real_pkg_list.append(pkg.name)
+        return real_pkg_list
+
     def read_available_langpacks(self, pkg_query_sack):
         """ Common function for getting the list of languages in the
             available repos """
