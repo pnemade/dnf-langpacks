@@ -458,7 +458,6 @@ class LanginfoCommand(dnf.cli.Command):
 
         langc = LangpackCommon()
         langc.setup_conditional_pkgs(self.base.repos.iter_enabled())
-        avail_langpack_pkgs = langc.read_available_langpacks_pkgs(self.base.sack)
 
         for lang in args:
             print("Language-Id={0}".format(lang))
@@ -468,16 +467,17 @@ class LanginfoCommand(dnf.cli.Command):
             # Case to handle input like zh_CN, pt_BR
             elif lang in whitelisted_locales and len(lang) > 3 and \
                                                             lang.find("_") != -1:
-                list_pkgs = langc.get_matches_from_repo(avail_langpack_pkgs, lang)
+                (res, avail_langpack_pkgs) = langc.read_available_langpacks_pkgs(self.base.sack, lang)
+                list_pkgs = langc.check_virtual_provides(self.base.sack, res, avail_langpack_pkgs)
             # Case for full language name input like Japanese
             elif len(lang) > 3 and lang.find("_") == -1:
-                list_pkgs = langc.get_matches_from_repo(avail_langpack_pkgs,\
-                                                 langc.langname_to_langcode(lang))
+                (res, avail_langpack_pkgs) = langc.read_available_langpacks_pkgs(self.base.sack, langc.langname_to_langcode(lang))
+                list_pkgs = langc.check_virtual_provides(self.base.sack, res, avail_langpack_pkgs)
             # General case to handle input like ja, ru, fr, it
             else:
                 if lang.find("_") == -1:
-                    list_pkgs = langc.get_matches_from_repo(avail_langpack_pkgs,\
-                                                                            lang)
+                    (res, avail_langpack_pkgs) = langc.read_available_langpacks_pkgs(self.base.sack, lang)
+                    list_pkgs = langc.check_virtual_provides(self.base.sack, res, avail_langpack_pkgs)
                 # Case to not process mr_IN or mai_IN locales
                 else:
                     list_pkgs = []
