@@ -1,9 +1,13 @@
-Overview of changes leading to 0.8.1 release
+Overview of changes leading to 0.9.0 release
+----------------
+-
 
+Overview of changes leading to 0.8.1 release
 Mon, Feb 12, 2015
 -----------------
 - LangpackCommon: Fix print statement without parenthesis for py3
 
+Overview of changes leading to 0.8.0 release
 Mon, Feb 12, 2015
 -----------------
 - langlist: print message when langlist is empty in installed_langpacks file
@@ -15,52 +19,62 @@ Mon, Feb 12, 2015
 - I think all code uses unicode strings now
 - permissions are optional and currently they errors in py3 fedora package, so remove them
 
+Overview of changes leading to 0.7.0 release
 Mon, Feb 02, 2015
 -----------------
 - Added langpacks.conf file
 
+Overview of changes leading to 0.6.1 release
 Wed, Jan 07, 2015
 -----------------
 - langavailable: Fix the non-unicode langname 
 - langavailable: Use the list comprehensions
 
+Overview of changes leading to 0.6.0 release
 Tue, Dec 23, 2014
 -----------------
 - langinstall: Display separate messages for langpack already installed
   or no langpacks available along with newly installed langpack message
 - langavailable: Fix unicode warning
 
+Overview of changes leading to 0.5.1 release
 Thu, Nov 20, 2014
 ------------------
 - langremove: man-pages-zh-CN package is not removed for zh_CN locale
 - langinstall: man-pages-zh-CN package is not installed for zh_CN locale
 - langinfo: man-pages-zh-CN package is not shown for zh_CN locale
 
+Overview of changes leading to 0.5.0 release
 Sat, Oct 11, 2014
 ------------------
 - Added langremove command
 - updated man page for langremove command usage
 
+Overview of changes leading to 0.4.0 release
 Tue, Oct 07, 2014
 ------------------
 - Added langinstall command
 - updated man page for langinstall command usage
 
+Overview of changes leading to 0.3.1 release
 Wed, Aug 27, 2014
 -------------------
 - Added license text header to langpacks.py
 - fix incompatibility issue with dnf-0.6.0 release
 
+Overview of changes leading to 0.3.0 release
 Tue, Jul 08, 2014
 -------------------
 - Added langlist command
 
+Overview of changes leading to 0.2.0 release
 Mon, Jul 07, 2014
 -------------------
 - Added langinfo command
 - code cleanups using dnf-plugins-core lint
 - don't need root privileges for langavailable command
 
+Overview of changes leading to 0.1.0 release
 Wed, Jun 11, 2014 
 -------------------
 - Added all initial source files

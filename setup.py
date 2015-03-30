@@ -5,7 +5,7 @@ Build script for dnf-langpacks
 from setuptools import setup, find_packages
 
 setup (name = "dnf-langpacks",
-    version = '0.8.1',
+    version = '0.9.0',
     packages = find_packages(), 
     description = "Automatic installation of langpacks of packages being installed.",
     author = 'Parag Nemade',
