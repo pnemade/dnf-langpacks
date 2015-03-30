@@ -1,3 +1,85 @@
+commit 76b4f7fedb9f4e8da60d69d63e0ea7f7ac762033
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Mar 30 16:59:39 2015 +0530
+
+    Update NEWS and bump the release to 0.9.0
+
+ NEWS     | 16 +++++++++++++++-
+ setup.py |  2 +-
+ 2 files changed, 16 insertions(+), 2 deletions(-)
+
+commit 151463b3541a5ffeee0148fdab208fbfdc04242f
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Mar 30 14:19:18 2015 +0530
+
+    Fix some lint issues
+
+ langpacks.py | 33 ++++++++++++++++++++-------------
+ 1 file changed, 20 insertions(+), 13 deletions(-)
+
+commit 1fbf9e6351f0d0ea09ef9fd260a4b2c706ae7158
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Mar 30 14:12:03 2015 +0530
+
+    find_matching_pkgs: consider case where we need only pt_BR packages not to fallback for pt packages
+
+ langpacks.py | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+commit 71a0be75303e4678555ffc9feb2f9d3ea910ed52
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Mar 30 14:08:03 2015 +0530
+
+    read_available_langpacks_pkgs: Changed this method code as we only want to match given lang suffix packages
+
+ langpacks.py | 22 ++++++++++------------
+ 1 file changed, 10 insertions(+), 12 deletions(-)
+
+commit 75ee2abaa01d19bb8aebf63db988afc868d6048f
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Mar 30 14:03:41 2015 +0530
+
+    langinfo: call now check_virtual_provides to get package list
+
+ langpacks.py | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+commit ab80d3777cc54626e6138d85bf5e0a57fc9dbfa8
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Mar 30 14:00:51 2015 +0530
+
+    get_matches_from_repo: removed this method in favour of check_virtual_provides
+
+ langpacks.py | 35 -----------------------------------
+ 1 file changed, 35 deletions(-)
+
+commit 594756c0db3d4b70a24bfa46898dd124a2d58721
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Mar 30 12:49:33 2015 +0530
+
+    read_available_langpacks: We don't need to skip tesseract packages now
+
+ langpacks.py | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+commit a899aef9f975b7fdeadcb1424ace51ac76809efa
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Mar 30 12:42:50 2015 +0530
+
+    langinfo: added check_virtual_provides method
+
+ langpacks.py | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+commit d51f02898f398572d5f895c368dc3d7e9e9b3da9
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Feb 12 14:14:14 2015 +0530
+
+    Update ChangeLog and prepare for 0.8.1 release
+
+ ChangeLog | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+
 commit 59d0da66a6fc6f74f2e80188ab408e4dc77f97b5
 Author: Parag Nemade <pnemade@redhat.com>
 Date:   Thu Feb 12 14:13:35 2015 +0530
