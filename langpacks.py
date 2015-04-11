@@ -628,7 +628,14 @@ class LangremoveCommand(dnf.cli.Command):
         langc.setup_conditional_pkgs(self.base.repos.iter_enabled())
         langc.read_available_langpacks(self.base.sack)
         all_pkgs = []
+        langinstalled_no_packages = []
+        langnotinstalled_no_packages = []
 
+        installed_langpack_list = langc.read_installed_langpacks()
+        # We consider only 3 cases here
+        # langinstalled with pkgs, langnotinstalled but packages, Langpacks removed
+        # langinstalled with no pkgs, Langpacks removed
+        # langnotinstalled with no pkgs, No Langpacks to remove message
         for lang in args:
             if len(lang) > 3 and lang.find("_") == -1:
                 pkgs = langc.remove_matches_from_ts( \
@@ -637,12 +644,22 @@ class LangremoveCommand(dnf.cli.Command):
                     langc.langinstalled.append(langc.langname_to_langcode(lang))
                     for pk in pkgs:
                         all_pkgs.append(pk)
+                else:
+                    if langc.langname_to_langcode(lang) in installed_langpack_list:
+                        langinstalled_no_packages.append(langc.langname_to_langcode(lang))
+                    else:
+                        langnotinstalled_no_packages.append(langc.langname_to_langcode(lang))
             else:
                 pkgs = langc.remove_matches_from_ts(lang, self.base)
                 if pkgs and lang not in langc.langinstalled:
                     langc.langinstalled.append(lang)
                     for pk in pkgs:
                         all_pkgs.append(pk)
+                else:
+                    if lang in installed_langpack_list:
+                        langinstalled_no_packages.append(lang)
+                    else:
+                        langnotinstalled_no_packages.append(lang)
 
         for pkg in all_pkgs:
             try:
@@ -663,7 +680,10 @@ class LangremoveCommand(dnf.cli.Command):
             print('Language packs removed for: %s' \
                                          % (' '.join(langc.langinstalled)))
             langc.remove_langpack_from_installed_list(langc.langinstalled)
+            if langnotinstalled_no_packages:
+                print('No langpacks to remove for: %s' % (' '.join(langnotinstalled_no_packages)))
         else:
+            langc.remove_langpack_from_installed_list(args)
             print('No langpacks to remove for: %s' % (' '.join(args)))
 
         return
