@@ -1,6 +1,19 @@
+Overview of changes leading to 0.9.1 release
+Tue, Apr 14, 2015
+-----------------
+- langremove: Enhacement to print installed, non-installed langpacks exclusively
+- man: Change manpage name to follow dnf plugins man page naming
+
 Overview of changes leading to 0.9.0 release
-----------------
--
+Mon, Mar 30, 2015
+-----------------
+- Fix some lint issues
+- find_matching_pkgs: consider case where we need only pt_BR packages not to fallback for pt packages
+- read_available_langpacks_pkgs: Changed this method code as we only want to match given lang suffix packages
+- langinfo: call now check_virtual_provides to get package list
+- get_matches_from_repo: removed this method in favour of check_virtual_provides
+- read_available_langpacks: We don't need to skip tesseract packages now
+- langinfo: added check_virtual_provides method
 
 Overview of changes leading to 0.8.1 release
 Mon, Feb 12, 2015
