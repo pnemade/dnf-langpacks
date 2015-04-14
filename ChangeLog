@@ -1,3 +1,41 @@
+commit 6677e41f5ca5963317c7250c8ca8221acac193ea
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Apr 14 14:11:16 2015 +0530
+
+    Update NEWS and bump release to 0.9.1
+
+ NEWS     | 17 +++++++++++++++--
+ setup.py |  4 ++--
+ 2 files changed, 17 insertions(+), 4 deletions(-)
+
+commit 3e4670c15589ef44b3467063612fe525131e692e
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Tue Apr 14 14:09:47 2015 +0530
+
+    man: Change manpage name to follow dnf plugins man page naming
+
+ dnf-langpacks.8        | 72 ------------------------------------------------
+ dnf.plugin.langpacks.8 | 75 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 75 insertions(+), 72 deletions(-)
+
+commit 1292f6f6150c70fb48000aaf13f8055a647de6df
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Sat Apr 11 14:43:29 2015 +0530
+
+    langremove: Enhacement to print installed, non-installed langpacks exclusively
+
+ langpacks.py | 22 +++++++++++++++++++++-
+ 1 file changed, 21 insertions(+), 1 deletion(-)
+
+commit e1746aa04bae90e3971135df8b1fe64486f894b5
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Mar 30 17:00:30 2015 +0530
+
+    Update ChangeLog and prepare for 0.9.0 release
+
+ ChangeLog | 82 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 82 insertions(+)
+
 commit 76b4f7fedb9f4e8da60d69d63e0ea7f7ac762033
 Author: Parag Nemade <pnemade@redhat.com>
 Date:   Mon Mar 30 16:59:39 2015 +0530
