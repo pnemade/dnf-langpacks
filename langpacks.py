@@ -200,7 +200,8 @@ class LangpackCommon(object):
     def read_available_languages_list(self, pkg_query_sack):
         """ Get the available languages list """
         skip_pkg_list = ['devel', 'browser', 'debuginfo', 'music', 'overrides', \
-                     'Brazil', 'British', 'Farsi', 'LowSaxon', 'cs_CZ']
+                     'Brazil', 'British', 'Farsi', 'LowSaxon', 'cs_CZ', 'mysql',\
+                     'common', 'examples', 'ibase', 'odbc', 'postgresql', 'static']
         lang_list = []
         langpkgs = set()
 
@@ -227,27 +228,16 @@ class LangpackCommon(object):
     def get_unique_language_names(self, alllanglist):
         """ Let's gather available languages list"""
         uniq_lang_list = []
-        dup = 0
-        processed = 0
         item = ""
         for item in alllanglist:
             if item.count('_') or len(item) < 4:
-                processed = processed + 1
                 langname = self.langcode_to_langname(item)
 
-                if len(langname) < 1:
+                if len(langname) > 1 and langname not in uniq_lang_list:
                     uniq_lang_list.append(langname)
-
-                if langname not in uniq_lang_list:
-                    uniq_lang_list.append(langname)
-                else:
-                    dup = dup + 1
             else:
                 if item not in uniq_lang_list:
                     uniq_lang_list.append(item)
-                else:
-                    dup = dup + 1
-
         return sorted(uniq_lang_list)
 
     def read_installed_langpacks(self):
