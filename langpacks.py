@@ -419,7 +419,7 @@ class LangavailableCommand(dnf.cli.Command):
         else:
             for lang in args:
                 if len(lang) > 3 and lang.find("_") == -1:
-                    if lang.lower() in [x.lower() for x in lang_list]:
+                    if langc.langcode_to_langname(langc.langname_to_langcode(lang)).lower() in [x.lower() for x in lang_list]:
                         print("{0} is available".format(lang))
                     else:
                         print("{0} is not available".format(lang))
