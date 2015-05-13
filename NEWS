@@ -1,3 +1,12 @@
+Overview of changes leading to 0.10.0 release
+Wed, May 13, 2015
+-----------------
+- langavailable: Fix to accept language name endonym (rh#1220654)
+- langavailable: Fixed list of available languages. Problem was with qt-qtbase
+  new subpackages and tesseract-langpacks names (rh#1220656)
+- langinfo: Fixed checking language name validity (rh#1220704)
+- man: Fix typo for plugins to plugin
+
 Overview of changes leading to 0.9.1 release
 Tue, Apr 14, 2015
 -----------------
