@@ -1,3 +1,11 @@
+Overview of changes leading to 0.11.0 release
+Fri, Jul 17, 2015
+-----------------
+- use config parser and add code for init, resolved hook
+- Some lint cleanups
+- move whitelisted_locales to global variable
+- Add NEWS to Makefile
+
 Overview of changes leading to 0.10.0 release
 Wed, May 13, 2015
 -----------------
