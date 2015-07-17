@@ -38,7 +38,8 @@ class _LazyImportLangtable(object):
         return getattr(self.mod, name)
 
 langtable = _LazyImportLangtable()
-
+whitelisted_locales = ['en_AU', 'en_CA', 'en_GB', 'pt_BR', \
+                                                    'pt_PT', 'zh_CN', 'zh_TW']
 
 class CompsParser(object):
     def __init__(self):
@@ -446,9 +447,6 @@ class LanginfoCommand(dnf.cli.Command):
 
     def run(self, args):
         self.base.fill_sack()
-        whitelisted_locales = ['en_AU', 'en_CA', 'en_GB', 'pt_BR', \
-                                                    'pt_PT', 'zh_CN', 'zh_TW']
-
         langc = LangpackCommon()
         langc.setup_conditional_pkgs(self.base.repos.iter_enabled())
 
