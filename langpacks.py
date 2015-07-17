@@ -24,7 +24,7 @@ import dnf
 import dnf.cli
 import dnf.yum.misc
 import os
-
+import locale
 
 class _LazyImportLangtable(object):
     """ load lazily langtable module """
@@ -38,6 +38,7 @@ class _LazyImportLangtable(object):
         return getattr(self.mod, name)
 
 langtable = _LazyImportLangtable()
+alllangs = []
 whitelisted_locales = ['en_AU', 'en_CA', 'en_GB', 'pt_BR', \
                                                     'pt_PT', 'zh_CN', 'zh_TW']
 
@@ -686,6 +687,32 @@ class Langpacks(dnf.Plugin):
     name = 'langpacks'
     def __init__(self, base, cli):
         """Initialize the plugin instance."""
+        self.base = base
+        config = self.read_config(self.base.conf, "langpacks")
+        conflist = config.get('main', 'langpack_locales')
+
+        langc = LangpackCommon()
+        llist = langc.read_installed_langpacks()
+
+        (lang, encoding) = locale.getdefaultlocale()
+        # LANG=C returns (None, None). Set a default.
+        if lang == None:
+            lang = "en"
+        if conflist:
+            tmp = conflist.split(",")
+            for confitem in tmp:
+                confitem = confitem.strip()
+                shortlang = confitem.split('.UTF-8')[0]
+                if shortlang not in whitelisted_locales:
+                    shortlang = confitem.split('_')[0]
+                logger.info("Adding %s to language list", shortlang)
+                alllangs.append(shortlang)
+
+        for lang in llist:
+            if not lang.startswith("#"):
+                logger.info("Adding %s to language list", lang)
+                alllangs.append(lang)
+
         super(Langpacks, self).__init__(base, cli)
         if cli is not None:
             cli.register_command(LangavailableCommand)
@@ -694,3 +721,7 @@ class Langpacks(dnf.Plugin):
             cli.register_command(LanginstallCommand)
             cli.register_command(LangremoveCommand)
         logger.debug("initialized Langpacks plugin")
+
+    def resolved(self):
+        """ Once transaction is resolved we are here """
+        logger.info("langpacks: enabled languages are %s", alllangs)
