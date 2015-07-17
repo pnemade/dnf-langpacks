@@ -2,7 +2,7 @@
 #
 # Conditional language support packages, via a dnf plugin
 #
-# Copyright © 2014 Red Hat, Inc.
+# Copyright © 2014-2015 Red Hat, Inc.
 #
 # Authors: Parag Nemade <pnemade@redhat.com>
 #
@@ -202,7 +202,7 @@ class LangpackCommon(object):
         """ Get the available languages list """
         skip_pkg_list = ['devel', 'browser', 'debuginfo', 'music', 'overrides', \
                      'Brazil', 'British', 'Farsi', 'LowSaxon', 'cs_CZ', 'mysql',\
-                     'common', 'examples', 'ibase', 'odbc', 'postgresql', 'static']
+                    'common', 'examples', 'ibase', 'odbc', 'postgresql', 'static']
         lang_list = []
         langpkgs = set()
 
@@ -625,7 +625,7 @@ class LangremoveCommand(dnf.cli.Command):
 
         installed_langpack_list = langc.read_installed_langpacks()
         # We consider only 3 cases here
-        # langinstalled with pkgs, langnotinstalled but packages, Langpacks removed
+        # langinstalled with pkgs, langnotinstalled but pkgs, Langpacks removed
         # langinstalled with no pkgs, Langpacks removed
         # langnotinstalled with no pkgs, No Langpacks to remove message
         for lang in args:
