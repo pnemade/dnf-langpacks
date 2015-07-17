@@ -1,3 +1,58 @@
+commit 89e9a2ffd76362c4dbeab8f84441896cbda014d7
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Fri Jul 17 13:59:53 2015 +0530
+
+    Update NEWS and bump release to 0.11.0
+
+ NEWS     | 8 ++++++++
+ setup.py | 2 +-
+ 2 files changed, 9 insertions(+), 1 deletion(-)
+
+commit fc29c652fa47f4548f103fb1296e85aee1c0ce9a
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Fri Jul 17 13:57:09 2015 +0530
+
+    use config parser and add code for init, resolved hook
+
+ langpacks.py | 33 ++++++++++++++++++++++++++++++++-
+ 1 file changed, 32 insertions(+), 1 deletion(-)
+
+commit 48a872fa9052a35c57b1c95d052a407fe52a9bc7
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Fri Jul 17 13:33:13 2015 +0530
+
+    Some lint cleanups
+
+ langpacks.py | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 53da88cad9136757f54927854fc99f78fbd301b2
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Fri Jul 17 13:30:47 2015 +0530
+
+    move whitelisted_locales to global variable
+
+ langpacks.py | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+commit 30d73d2087e9af3a15cbfa68e23f600fd8ae9562
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Fri Jul 17 13:24:09 2015 +0530
+
+    Add NEWS to Makefile
+
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit ece660c64445e13b620a9032aeca576cda940e4b
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed May 13 19:15:12 2015 +0530
+
+    Update ChangeLog and prepare for 0.10.0 release
+
+ ChangeLog | 64 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 64 insertions(+)
+
 commit 45b40c504c8d3799ff119333449d54edaa96bbb0
 Author: Parag Nemade <pnemade@redhat.com>
 Date:   Wed May 13 18:53:50 2015 +0530
