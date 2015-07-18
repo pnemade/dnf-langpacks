@@ -1,3 +1,40 @@
+commit a5d96bd8ec18380dea91e9c87291a90d13679d68
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Sat Jul 18 18:42:31 2015 +0530
+
+    Update NEWS and bump release to 0.11.1
+
+ NEWS     | 6 ++++++
+ setup.py | 2 +-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+commit c49c47bdc7a73fabea5e4c61c9e7c206f2308a2a
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Sat Jul 18 18:40:58 2015 +0530
+
+    man: update manpage
+
+ dnf.plugin.langpacks.8 | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+commit 5ddc0ffafe33e4e1f9141700e2ed7808d472b296
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Sat Jul 18 18:28:42 2015 +0530
+
+    init: add config parser exceptions
+
+ langpacks.py | 38 +++++++++++++++++++++++---------------
+ 1 file changed, 23 insertions(+), 15 deletions(-)
+
+commit b84a5d26543d42546cb1fc15b43240e0363c24a4
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Fri Jul 17 14:01:23 2015 +0530
+
+    Update ChangeLog and prepare for 0.11.0 release
+
+ ChangeLog | 55 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 55 insertions(+)
+
 commit 89e9a2ffd76362c4dbeab8f84441896cbda014d7
 Author: Parag Nemade <pnemade@redhat.com>
 Date:   Fri Jul 17 13:59:53 2015 +0530
