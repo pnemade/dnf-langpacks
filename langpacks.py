@@ -25,6 +25,7 @@ import dnf.cli
 import dnf.yum.misc
 import os
 import locale
+import iniparse.compat as ini
 
 class _LazyImportLangtable(object):
     """ load lazily langtable module """
@@ -688,25 +689,32 @@ class Langpacks(dnf.Plugin):
     def __init__(self, base, cli):
         """Initialize the plugin instance."""
         self.base = base
-        config = self.read_config(self.base.conf, "langpacks")
-        conflist = config.get('main', 'langpack_locales')
-
-        langc = LangpackCommon()
-        llist = langc.read_installed_langpacks()
-
         (lang, encoding) = locale.getdefaultlocale()
         # LANG=C returns (None, None). Set a default.
         if lang == None:
             lang = "en"
-        if conflist:
-            tmp = conflist.split(",")
-            for confitem in tmp:
-                confitem = confitem.strip()
-                shortlang = confitem.split('.UTF-8')[0]
-                if shortlang not in whitelisted_locales:
-                    shortlang = confitem.split('_')[0]
-                logger.info("Adding %s to language list", shortlang)
-                alllangs.append(shortlang)
+        try:
+            config = self.read_config(self.base.conf, "langpacks")
+            try:
+                conflist = config.get('main', 'langpack_locales')
+                if conflist:
+                    tmp = conflist.split(",")
+                    for confitem in tmp:
+                        confitem = confitem.strip()
+                        shortlang = confitem.split('.UTF-8')[0]
+                        if shortlang not in whitelisted_locales:
+                            shortlang = confitem.split('_')[0]
+                        logger.info("Adding %s to language list", shortlang)
+                        alllangs.append(shortlang)
+            except ini.NoSectionError:
+                print("langpacks: No main section defined in langpacks.conf")
+            except ini.NoOptionError:
+                print("langpacks: No languages are enabled")
+        except ini.Error:
+            print('langpacks.conf file could not be found')
+
+        langc = LangpackCommon()
+        llist = langc.read_installed_langpacks()
 
         for lang in llist:
             if not lang.startswith("#"):
