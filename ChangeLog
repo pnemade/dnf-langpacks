@@ -1,3 +1,31 @@
+commit d3172e9b03d19e7ed944d46da5c1015cbc2a0295
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Jul 20 14:28:46 2015 +0530
+
+    Update NEWS and bump release to 0.12.0
+
+ NEWS     | 5 +++++
+ setup.py | 2 +-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+commit fdd612c9192d125a058a05b6003877aa23a8b3d9
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Mon Jul 20 14:24:07 2015 +0530
+
+    logging: become more verbose by moving existing print messages to debug messages
+
+ langpacks.py | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+commit ab614cdf175d969c9189c142d819c3543faac07e
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Sat Jul 18 18:43:07 2015 +0530
+
+    Update ChangeLog and prepare for 0.11.1 release
+
+ ChangeLog | 37 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
+
 commit a5d96bd8ec18380dea91e9c87291a90d13679d68
 Author: Parag Nemade <pnemade@redhat.com>
 Date:   Sat Jul 18 18:42:31 2015 +0530
