@@ -253,7 +253,7 @@ class LangpackCommon(object):
             llist = conf_fp.readlines()
             conf_fp.close()
         except (IOError, OSError) as fperror:
-            print('Error reading file : %s as it does not exist' % self.conffile)
+            logger.debug('Error reading file : %s as it does not exist' % self.conffile)
             return []
         for item in llist:
             item = item.strip()
@@ -704,21 +704,21 @@ class Langpacks(dnf.Plugin):
                         shortlang = confitem.split('.UTF-8')[0]
                         if shortlang not in whitelisted_locales:
                             shortlang = confitem.split('_')[0]
-                        logger.info("Adding %s to language list", shortlang)
+                        logger.debug("Adding %s to language list", shortlang)
                         alllangs.append(shortlang)
             except ini.NoSectionError:
-                print("langpacks: No main section defined in langpacks.conf")
+                logger.debug("langpacks: No main section defined in langpacks.conf")
             except ini.NoOptionError:
-                print("langpacks: No languages are enabled")
+                logger.debug("langpacks: No languages are enabled")
         except ini.Error:
-            print('langpacks.conf file could not be found')
+            logger.debug('langpacks.conf file could not be found')
 
         langc = LangpackCommon()
         llist = langc.read_installed_langpacks()
 
         for lang in llist:
             if not lang.startswith("#"):
-                logger.info("Adding %s to language list", lang)
+                logger.debug("Adding %s to language list", lang)
                 alllangs.append(lang)
 
         super(Langpacks, self).__init__(base, cli)
@@ -732,4 +732,4 @@ class Langpacks(dnf.Plugin):
 
     def resolved(self):
         """ Once transaction is resolved we are here """
-        logger.info("langpacks: enabled languages are %s", alllangs)
+        logger.debug("langpacks: enabled languages are %s", alllangs)
