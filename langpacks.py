@@ -740,4 +740,7 @@ class Langpacks(dnf.Plugin):
 
     def resolved(self):
         """ Once transaction is resolved we are here """
-        logger.debug("langpacks: enabled languages are %s", alllangs)
+        if alllangs:
+            logger.debug("langpacks: enabled languages are %s", alllangs)
+        else:
+            logger.debug("langpacks: No languages are enabled")
