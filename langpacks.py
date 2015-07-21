@@ -40,6 +40,10 @@ class _LazyImportLangtable(object):
 
 langtable = _LazyImportLangtable()
 alllangs = []
+# Most languages are used by just locale code but some are
+# used fully <localecode_countrycode>. We need to collect all
+# such locales and use them to search langpacks for them.
+# otherwise we default serach langpacks by just localecode only.
 whitelisted_locales = ['en_AU', 'en_CA', 'en_GB', 'pt_BR', \
                                                     'pt_PT', 'zh_CN', 'zh_TW']
 
@@ -202,6 +206,10 @@ class LangpackCommon(object):
 
     def read_available_languages_list(self, pkg_query_sack):
         """ Get the available languages list """
+        # all unnecessary packages which starts with conditional packages
+        # but ends with no locale name should be discarded e.g. we are
+        # interested in aspell-en only and not in aspell-devel
+        # also we have locale cs only and not cs_CZ
         skip_pkg_list = ['devel', 'browser', 'debuginfo', 'music', 'overrides', \
                      'Brazil', 'British', 'Farsi', 'LowSaxon', 'cs_CZ', 'mysql',\
                     'common', 'examples', 'ibase', 'odbc', 'postgresql', 'static']
