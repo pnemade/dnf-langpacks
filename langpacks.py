@@ -44,8 +44,8 @@ alllangs = []
 # used fully <localecode_countrycode>. We need to collect all
 # such locales and use them to search langpacks for them.
 # otherwise we default serach langpacks by just localecode only.
-whitelisted_locales = ['en_AU', 'en_CA', 'en_GB', 'pt_BR', \
-                                                    'pt_PT', 'zh_CN', 'zh_TW']
+whitelisted_locales = ['en_AU', 'en_CA', 'en_GB', 'pt_BR',
+                       'pt_PT', 'zh_CN', 'zh_TW']
 
 class CompsParser(object):
     def __init__(self):
@@ -96,12 +96,11 @@ class LangpackCommon(object):
             except IOError:
                 print("Unable to create installed_langpacks file")
 
-
     @classmethod
     def langcode_to_langname(cls, langcode):
         """ We need to get the language name for the given locale code  """
-        return langtable.language_name(languageId=langcode, \
-                                    languageIdQuery="en")
+        return langtable.language_name(languageId=langcode,
+                                       languageIdQuery="en")
 
     @classmethod
     def langname_to_langcode(cls, langname):
@@ -129,13 +128,14 @@ class LangpackCommon(object):
                 continue
 
             if repo.md_only_cached:
-                infile = dnf.yum.misc.calculate_repo_gen_dest(comps_fn, \
-                                                             'groups.xml')
+                infile = dnf.yum.misc.calculate_repo_gen_dest(
+                    comps_fn, 'groups.xml')
                 if not os.path.exists(infile):
                     # root privileges are needed for comps decompression
                     continue
             else:
-                infile = dnf.yum.misc.repo_gen_decompress(comps_fn, 'groups.xml')
+                infile = dnf.yum.misc.repo_gen_decompress(
+                    comps_fn, 'groups.xml')
 
             comparse = CompsParser()
             for tp in comparse.iterparse(infile):
@@ -210,9 +210,10 @@ class LangpackCommon(object):
         # but ends with no locale name should be discarded e.g. we are
         # interested in aspell-en only and not in aspell-devel
         # also we have locale cs only and not cs_CZ
-        skip_pkg_list = ['devel', 'browser', 'debuginfo', 'music', 'overrides', \
-                     'Brazil', 'British', 'Farsi', 'LowSaxon', 'cs_CZ', 'mysql',\
-                    'common', 'examples', 'ibase', 'odbc', 'postgresql', 'static']
+        skip_pkg_list = ['devel', 'browser', 'debuginfo', 'music', 'overrides',
+                         'Brazil', 'British', 'Farsi', 'LowSaxon', 'cs_CZ',
+                         'mysql', 'common', 'examples', 'ibase', 'odbc',
+                         'postgresql', 'static']
         lang_list = []
         langpkgs = set()
 
@@ -261,7 +262,8 @@ class LangpackCommon(object):
             llist = conf_fp.readlines()
             conf_fp.close()
         except (IOError, OSError) as fperror:
-            logger.debug('Error reading file : %s as it does not exist' % self.conffile)
+            logger.debug("Error reading file : %s as it does not exist",
+                         self.conffile)
             return []
         for item in llist:
             item = item.strip()
@@ -336,7 +338,8 @@ class LangpackCommon(object):
 
                 for p in patterns:
                     if p not in pkgmatches:
-                        # just pattern matched pkgs irrespective of its existence
+                        # just pattern matched pkgs irrespective of its
+                        # existence
                         pkgmatches.append(p)
         return pkgmatches
 
@@ -467,8 +470,7 @@ class LanginfoCommand(dnf.cli.Command):
                 print("Not a valid input")
                 return 0, [""]
             # Case to handle input like zh_CN, pt_BR
-            elif lang in whitelisted_locales and len(lang) > 3 and \
-                                                            lang.find("_") != -1:
+            elif lang in whitelisted_locales and len(lang) > 3 and lang.find("_") != -1:
                 (res, avail_langpack_pkgs) = langc.read_available_langpacks_pkgs(
                     self.base.sack, lang)
                 list_pkgs = langc.check_virtual_provides(
@@ -511,7 +513,7 @@ class LanglistCommand(dnf.cli.Command):
         demands.root_user = False
         demands.sack_activation = True
 
-    def run(self, args):
+    def run(self, _):
         langc = LangpackCommon()
         llist = langc.read_installed_langpacks()
         if llist:
@@ -545,27 +547,28 @@ class LanginstallCommand(dnf.cli.Command):
         all_pkgs = []
 
         for lang in args:
-            ## Full language names
+            # Full language names
             if len(lang) > 3 and lang.find("_") == -1:
-                pkgs = langc.add_matches_from_ts( \
-                            langc.langname_to_langcode(lang), self.base)
+                pkgs = langc.add_matches_from_ts(
+                    langc.langname_to_langcode(lang), self.base)
                 if pkgs and lang not in langc.langinstalled:
-                    langc.langinstalled.append(langc.langname_to_langcode(lang))
+                    langc.langinstalled.append(
+                        langc.langname_to_langcode(lang))
                     for pk in pkgs:
                         all_pkgs.append(pk)
                 else:
-                    if langc.langname_to_langcode(lang) in \
-                                               langc.read_installed_langpacks():
-                        langc.langalreadyinstalled.append( \
-                                               langc.langname_to_langcode(lang))
+                    if langc.langname_to_langcode(lang) in langc.read_installed_langpacks():
+                        langc.langalreadyinstalled.append(
+                            langc.langname_to_langcode(lang))
                     else:
-                        # consider case like input is invalid langname like paap
+                        # consider case like input is invalid langname like
+                        # paap
                         if langc.langname_to_langcode(lang):
-                            langc.nolangpacks.append(langc.langname_to_langcode\
-                                                                          (lang))
+                            langc.nolangpacks.append(langc.langname_to_langcode
+                                                     (lang))
                         else:
                             langc.nolangpacks.append(lang)
-            ## locale codes given as input
+            # locale codes given as input
             else:
                 pkgs = langc.add_matches_from_ts(lang, self.base)
                 if pkgs and lang not in langc.langinstalled:
@@ -589,25 +592,25 @@ class LanginstallCommand(dnf.cli.Command):
         to_dnl = []
         if ret:
             for tsi in self.base.transaction:
-                print(" "+tsi.active_history_state+" - "+ str(tsi.active))
+                print(" " + tsi.active_history_state + " - " + str(tsi.active))
                 if tsi.installed:
                     to_dnl.append(tsi.installed)
             self.base.download_packages(to_dnl)
             self.base.do_transaction()
             if langc.langalreadyinstalled:
-                print('langpacks already installed for: %s' % \
-                                    (' '.join(langc.langalreadyinstalled)))
+                print('langpacks already installed for: %s' %
+                      (' '.join(langc.langalreadyinstalled)))
 
-            print('Language packs installed for: %s' \
-                                         % (' '.join(langc.langinstalled)))
+            print('Language packs installed for: %s' %
+                  (' '.join(langc.langinstalled)))
             langc.add_langpack_to_installed_list(langc.langinstalled)
         else:
             if langc.langalreadyinstalled:
-                print('langpacks already installed for: %s' % \
-                                    (' '.join(langc.langalreadyinstalled)))
+                print('langpacks already installed for: %s' %
+                      (' '.join(langc.langalreadyinstalled)))
             if langc.nolangpacks:
-                print('No langpacks to install for: %s' % \
-                                             (' '.join(langc.nolangpacks)))
+                print('No langpacks to install for: %s' %
+                      (' '.join(langc.nolangpacks)))
 
         return
 
@@ -640,17 +643,20 @@ class LangremoveCommand(dnf.cli.Command):
         # langnotinstalled with no pkgs, No Langpacks to remove message
         for lang in args:
             if len(lang) > 3 and lang.find("_") == -1:
-                pkgs = langc.remove_matches_from_ts( \
-                            langc.langname_to_langcode(lang), self.base)
+                pkgs = langc.remove_matches_from_ts(
+                    langc.langname_to_langcode(lang), self.base)
                 if pkgs and lang not in langc.langinstalled:
-                    langc.langinstalled.append(langc.langname_to_langcode(lang))
+                    langc.langinstalled.append(
+                        langc.langname_to_langcode(lang))
                     for pk in pkgs:
                         all_pkgs.append(pk)
                 else:
                     if langc.langname_to_langcode(lang) in installed_langpack_list:
-                        langinstalled_no_packages.append(langc.langname_to_langcode(lang))
+                        langinstalled_no_packages.append(
+                            langc.langname_to_langcode(lang))
                     else:
-                        langnotinstalled_no_packages.append(langc.langname_to_langcode(lang))
+                        langnotinstalled_no_packages.append(
+                            langc.langname_to_langcode(lang))
             else:
                 pkgs = langc.remove_matches_from_ts(lang, self.base)
                 if pkgs and lang not in langc.langinstalled:
@@ -674,19 +680,21 @@ class LangremoveCommand(dnf.cli.Command):
         to_dnl = []
         if ret:
             for tsi in self.base.transaction:
-                print(" "+tsi.active_history_state+" - "+ str(tsi.active))
+                print(" " + tsi.active_history_state + " - " + str(tsi.active))
                 if tsi.installed:
                     to_dnl.append(tsi.installed)
             self.base.download_packages(to_dnl)
             self.base.do_transaction()
-            print('Language packs removed for: %s' \
-                                         % (' '.join(langc.langinstalled)))
+            print('Language packs removed for: %s' %
+                  (' '.join(langc.langinstalled)))
             langc.remove_langpack_from_installed_list(langc.langinstalled)
             if langnotinstalled_no_packages:
-                print('No langpacks to remove for: %s' % (' '.join(langnotinstalled_no_packages)))
+                print('No langpacks to remove for: %s' %
+                      (' '.join(langnotinstalled_no_packages)))
         else:
             langc.remove_langpack_from_installed_list(args)
-            print('No langpacks to remove for: %s' % (' '.join(args)))
+            print('No langpacks to remove for: %s' %
+                  (' '.join(args)))
 
         return
 
@@ -697,7 +705,7 @@ class Langpacks(dnf.Plugin):
     def __init__(self, base, cli):
         """Initialize the plugin instance."""
         self.base = base
-        (lang, encoding) = locale.getdefaultlocale()
+        (lang, _) = locale.getdefaultlocale()
         # LANG=C returns (None, None). Set a default.
         if lang == None:
             lang = "en"
@@ -715,7 +723,8 @@ class Langpacks(dnf.Plugin):
                         logger.debug("Adding %s to language list", shortlang)
                         alllangs.append(shortlang)
             except ini.NoSectionError:
-                logger.debug("langpacks: No main section defined in langpacks.conf")
+                logger.debug(
+                    "langpacks: No main section defined in langpacks.conf")
             except ini.NoOptionError:
                 logger.debug("langpacks: No languages are enabled")
         except ini.Error:
