@@ -706,9 +706,18 @@ class Langpacks(dnf.Plugin):
         """Initialize the plugin instance."""
         self.base = base
         (lang, _) = locale.getdefaultlocale()
+
+        if lang.endswith(".UTF-8"):
+            lang = lang.split('.UTF-8')[0]
+        if lang.find("_"):
+            if lang not in whitelisted_locales:
+                lang = lang.split('_')[0]
+
         # LANG=C returns (None, None). Set a default.
-        if lang == None:
+        if lang is None:
             lang = "en"
+        alllangs.append(lang)
+
         try:
             config = self.read_config(self.base.conf, "langpacks")
             try:
