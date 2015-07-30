@@ -545,8 +545,17 @@ class LanginstallCommand(dnf.cli.Command):
         langc.setup_conditional_pkgs(self.base.repos.iter_enabled())
         langc.read_available_langpacks(self.base.sack)
         all_pkgs = []
+        inlangs = []
 
-        for lang in args:
+        # inlangs contains user given input languages
+        # as well as system enabled languages list
+        if args:
+            for item in alllangs:
+                inlangs.append(item)
+            for item in args:
+                inlangs.append(item)
+
+        for lang in inlangs:
             # Full language names
             if len(lang) > 3 and lang.find("_") == -1:
                 pkgs = langc.add_matches_from_ts(
