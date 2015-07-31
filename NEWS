@@ -1,3 +1,15 @@
+Overview of changes leading to 0.14.0 release
+Fri, Jul 31, 2015
+-----------------
+- langpacks.conf: start using dnf plugins directory under /var
+- man: update man page
+- langinstall: improve to always use enabled languages as an input
+- langpacks: Consider '$LANG' output when no languages are enabled
+- beautify the code for pylint
+- resolved: Add correct debug messages for enabled and disabled languages
+- Add few comments for easy code review
+- langpacks.conf: removed enabled config item as plugins are default enabled
+
 Overview of changes leading to 0.12.0 release
 Mon, Jul 20, 2015
 -----------------
