@@ -1,3 +1,9 @@
+Overview of changes leading to 0.15.0 release
+Thu, Aug 13, 2015
+-----------------
+- langpackcommon: use dnf plugins path under /var now
+- langinstall: getting all enabled languages in alllangs, fix for locale C, not to repeat en locale
+
 Overview of changes leading to 0.14.0 release
 Fri, Jul 31, 2015
 -----------------
