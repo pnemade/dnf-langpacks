@@ -1,3 +1,41 @@
+commit d61d1619658e1ea2b9a8e3fe9480d92bba6a2764
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Aug 13 13:28:58 2015 +0530
+
+    Update NEWS, setup.py, man page and bump release to 0.15.0
+
+ NEWS                   |  6 ++++++
+ dnf.plugin.langpacks.8 |  2 +-
+ setup.py               | 37 +++++++++++++++++++++----------------
+ 3 files changed, 28 insertions(+), 17 deletions(-)
+
+commit 6b768562773dfb2e47e3645037916fb6101ccc8b
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Aug 13 12:31:10 2015 +0530
+
+    langpackcommon: use dnf plugins path under /var now
+
+ langpacks.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit eced99813f1264234fa296d181cb4aa9cabb8fe0
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Aug 13 12:29:48 2015 +0530
+
+    langinstall: getting all enabled languages in alllangs, fix for locale C, not to repeat en locale
+
+ langpacks.py | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
+
+commit d90abbb25c240fd21a1b168c1e6fe9fa4257538a
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Fri Jul 31 13:38:41 2015 +0530
+
+    Update ChangeLog and prepare for 0.14.0 release
+
+ ChangeLog | 91 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 91 insertions(+)
+
 commit 07e19fd0adcd8b921eaae1f0247c16abe499c42a
 Author: Parag Nemade <pnemade@redhat.com>
 Date:   Fri Jul 31 13:38:03 2015 +0530
