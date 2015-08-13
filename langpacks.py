@@ -549,9 +549,9 @@ class LanginstallCommand(dnf.cli.Command):
 
         # inlangs contains user given input languages
         # as well as system enabled languages list
+        for item in alllangs:
+            inlangs.append(item)
         if args:
-            for item in alllangs:
-                inlangs.append(item)
             for item in args:
                 inlangs.append(item)
 
@@ -716,17 +716,17 @@ class Langpacks(dnf.Plugin):
         self.base = base
         (lang, _) = locale.getdefaultlocale()
 
+        # LANG=C returns (None, None). Set a default.
+        if lang is None:
+            lang = "en"
+
         if lang.endswith(".UTF-8"):
             lang = lang.split('.UTF-8')[0]
         if lang.find("_"):
             if lang not in whitelisted_locales:
                 lang = lang.split('_')[0]
 
-        # LANG=C returns (None, None). Set a default.
-        if lang is None:
-            lang = "en"
         alllangs.append(lang)
-
         try:
             config = self.read_config(self.base.conf, "langpacks")
             try:
@@ -739,7 +739,8 @@ class Langpacks(dnf.Plugin):
                         if shortlang not in whitelisted_locales:
                             shortlang = confitem.split('_')[0]
                         logger.debug("Adding %s to language list", shortlang)
-                        alllangs.append(shortlang)
+                        if shortlang not in alllangs:
+                            alllangs.append(shortlang)
             except ini.NoSectionError:
                 logger.debug(
                     "langpacks: No main section defined in langpacks.conf")
