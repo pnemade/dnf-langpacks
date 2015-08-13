@@ -79,7 +79,7 @@ class LangpackCommon(object):
         self.langinstalled = []
         self.langalreadyinstalled = []
         self.nolangpacks = []
-        self.conffile = '/var/lib/yum/plugins/langpacks/installed_langpacks'
+        self.conffile = '/var/lib/dnf/plugins/langpacks/installed_langpacks'
         # we are not sure if conffile already exists on the system or
         # user moved or deleted it. To make sure we have conffile before
         # using any langpacks command let's try to create it first.
