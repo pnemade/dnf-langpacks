@@ -549,10 +549,11 @@ class LanginstallCommand(dnf.cli.Command):
 
         # inlangs contains user given input languages
         # as well as system enabled languages list
-        for item in alllangs:
-            inlangs.append(item)
         if args:
             for item in args:
+                inlangs.append(item)
+        else:
+            for item in alllangs:
                 inlangs.append(item)
 
         for lang in inlangs:
