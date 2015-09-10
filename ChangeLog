@@ -1,3 +1,40 @@
+commit c1f08fd6818eef0b42a26e8c678d5d6e67f391dd
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Sep 10 11:33:52 2015 +0530
+
+    Update NEWS and bump release to 0.15.1
+
+ NEWS     | 5 +++++
+ setup.py | 2 +-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+commit 47cb6c857225775f811ae785a1fad2a98b2ff98a
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Sep 10 11:31:32 2015 +0530
+
+    man: update man page for langinstall
+
+ dnf.plugin.langpacks.8 | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+commit b37598723c6fe3706ed723bb2aa225306d99854c
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Wed Sep 9 11:37:02 2015 +0530
+
+    langinstall: When given args just install for args else for all enabled languages
+
+ langpacks.py | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+commit fb3b8ce1aff181b63b2f0aff6675a7a62c253eaf
+Author: Parag Nemade <pnemade@redhat.com>
+Date:   Thu Aug 13 13:34:54 2015 +0530
+
+    Update ChangeLog and prepare for 0.15.0 release
+
+ ChangeLog | 38 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
+
 commit d61d1619658e1ea2b9a8e3fe9480d92bba6a2764
 Author: Parag Nemade <pnemade@redhat.com>
 Date:   Thu Aug 13 13:28:58 2015 +0530
