@@ -1,3 +1,8 @@
+Overview of changes leading to 0.15.1 release
+Thu, Sep 10, 2015
+-----------------
+- langinstall: When given args just install for args else for all enabled languages
+
 Overview of changes leading to 0.15.0 release
 Thu, Aug 13, 2015
 -----------------
